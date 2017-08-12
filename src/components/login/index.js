@@ -1,0 +1,64 @@
+import React from 'react';
+
+import { graphql } from 'react-apollo';
+import login from 'src/graphql/mutations/login.gql';
+
+@graphql(login)
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { username: '', password: '', error: '' };
+    this.submitForm = this.submitForm.bind(this);
+    this.renderError = this.renderError.bind(this);
+  }
+
+  submitForm(e) {
+    e.preventDefault();
+
+    this.props.mutate({
+      variables: {
+        username: this.state.username,
+        password: this.state.password,
+      },
+    })
+      .then(({ data }) => {
+        console.log(data);
+        localStorage.setItem('token', data.login.token);
+        this.props.history.push('/dashboard');
+      }).catch(error => {
+        this.setState({ error: 'login problem' });
+        console.log('there was an error sending the query', error);
+      });
+  }
+
+  renderError() {
+    console.log('errror');
+    if (this.state.error) {
+      return <div>{this.state.error}</div>;
+    }
+    return null;
+  }
+
+
+  render() {
+    return (
+      <form onSubmit={this.submitForm}>
+        <input
+          name="username"
+          value={this.state.username}
+          type="text"
+          onChange={event => this.setState({ username: event.target.value })} />
+        <input
+          name="password"
+          value={this.state.password}
+          type="password"
+          onChange={event => this.setState({ password: event.target.value })} />
+        <input type="submit" value="login" />
+        {this.renderError()}
+      </form>
+    );
+  }
+}
+
+export default Login;
