@@ -1,0 +1,52 @@
+//==============================
+//Farsi Fonts :START
+//==============================
+	@include font-face('IRANSans','static/fonts/IRANSansWeb');
+
+
+//==============================
+//Farsi Fonts :END
+//==============================
+
+// - - - - - - - - - - - - - - - - - - -
+// - - typography
+// global typography styles
+
+
+%body-fa {
+  font: normal normal 14px/1.7 'IRANSans', 'Tahoma', 'Arial';
+  direction: rtl;
+}
+%title_level_1 {
+  font: .9em 'Open Sans', tahoma, arial;
+
+  @include mq_max($sm) {font-size: 1.8em;}
+  @include mq_max($xs) {font-size: 1.4em;}
+}
+
+
+
+//font icon
+	@include font-face('icomoon','static/fonts/icomoon');
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-plus:before{
+  content: "\e900";
+}
+.icon-search:before {
+  content: "\e901";
+}

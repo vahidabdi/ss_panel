@@ -1,0 +1,86 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - layout
+// global layout classes - height, width, padding, margin, etc.
+
+body {
+  color: $color_text;
+  background-color: #eee;
+  @extend %body-fa;
+  &.menu {
+    @include mq_max($sm) {
+      overflow: hidden;
+    }
+  }
+}
+#sprite_svg {
+  position: fixed;
+  z-index: -1;
+  width: 0;
+  height: 0;
+}
+.page-wrap {
+  position: relative;
+}
+.section {
+  position: relative;
+  overflow: hidden;
+  &.header{
+    overflow: visible;
+    @include mq_max($sm) {
+      overflow: hidden;
+      z-index:40;
+      transition: all 0.5s ease-out;
+    }
+    @include mq_max($md) {
+      .page-inside &{
+      overflow: hidden;
+      z-index:40;
+      transition: all 0.5s ease-out;
+      }
+    }
+
+  }
+  &.section--nohidden{
+    overflow: visible;
+  }
+
+  &__wrap {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1024px;
+    .section--sm &{
+      max-width:920px;
+
+    }
+    &.section--xs {
+      max-width:500px;
+    }
+    &.secction--relative{
+      height: 100%;
+      position: relative;
+    }
+
+
+  /*  @include mq_max($md){max-width: $max_width_lg;}
+    @include mq_max($sm){max-width: $max_width_lg;}
+    @include mq_max($xs){max-width: $max_width_lg;}*/
+    @include mq_max($md){
+      padding: 0 20px 30px;
+      max-width: $max_width_lg;
+    }
+    @include mq_max($sm){
+      padding: 0 25px 30px;
+      max-width: $max_width_lg;
+    }
+    @include mq_max($xs){
+      padding: 0 20px 20px;
+      max-width: $max_width_lg;
+    }
+
+  }
+&__main{
+    position: relative;
+  }
+
+
+}

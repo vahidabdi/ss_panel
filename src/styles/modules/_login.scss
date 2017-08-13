@@ -1,0 +1,27 @@
+.login{
+  background: #194261;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  form{
+    position: absolute;
+    padding: 25px;
+    background-color: #fff;
+    top: 50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    box-shadow: 3px 4px 5px -2px rgba(0,0,0,0.75);
+  }
+  input{
+    display: block;
+    direction: rtl;
+    background-color: #aaa;
+    border:1px solid #fff;
+    height: 25px;
+    margin:10px 0;
+    padding: 0 15px;
+    width: 100%;
+  }
+
+}

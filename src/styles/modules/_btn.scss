@@ -1,0 +1,18 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - btn module
+// styles for the btn module
+.btn{
+  background-color: $color_blue_dark;
+  color: #fff;
+  padding: 10px 30px;
+  opacity: 1;
+  transition: all 0.3s ;
+  &:hover{
+    opacity: 0.8;
+  }
+  >i{
+    display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  }
+}

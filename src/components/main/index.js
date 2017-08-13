@@ -55,7 +55,9 @@ export default () => (
         content: 'ReactQL starter kit app',
       }]} />
     <Route exact path="/" component={Login} />
-    <Route path="/dashboard" component={RequireAuth(Dashboard)} />
+
+    <Route path="/dashboard" component={Dashboard} />
     <Route path="/dashboard/setting" component={Setting} />
+
   </div>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { graphql } from 'react-apollo';
 import login from 'src/graphql/mutations/login.gql';
+import sass from 'src/styles/index.scss';
 
 @graphql(login)
 class Login extends React.Component {
@@ -43,20 +44,26 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitForm}>
-        <input
-          name="username"
-          value={this.state.username}
-          type="text"
-          onChange={event => this.setState({ username: event.target.value })} />
-        <input
-          name="password"
-          value={this.state.password}
-          type="password"
-          onChange={event => this.setState({ password: event.target.value })} />
-        <input type="submit" value="login" />
-        {this.renderError()}
-      </form>
+      <div className={`${sass['page-wrap']} ${sass['login-page']}`}>
+        <div className={sass.login}>
+          <form onSubmit={this.submitForm}>
+            <input
+              name="username"
+              value={this.state.username}
+              type="text"
+              placeholder="نام کاربری"
+              onChange={event => this.setState({ username: event.target.value })} />
+            <input
+              name="password"
+              value={this.state.password}
+              type="password"
+              placeholder="پسورد"
+              onChange={event => this.setState({ password: event.target.value })} />
+            <input type="submit" value="ورود" />
+            {this.renderError()}
+          </form>
+        </div>
+      </div>
     );
   }
 }

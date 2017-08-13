@@ -1,0 +1,240 @@
+// - - - - - - - - - - - - - - - - - - -
+// - - utilities
+// global extends, mixins, functions, and utility classes
+
+// - - - - - - - - - - - - - - - - - - -
+// - - extends
+
+
+//==============================
+//Placeholders :START
+//==============================
+	%full-bg {
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+	%reset-input {
+		padding: 0;
+		border: none;
+		outline: none;
+		background: none;
+	}
+	%icon-sprite {
+		background-repeat: no-repeat;
+		background-size: auto 100%;
+	}
+	%dibvam {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	%clearfix{
+		zoom:1;/* For IE 6/7 (trigger hasLayout) */
+		&::after,before{
+			content: "";
+			display: block;
+		}
+		&::after{
+			clear: both;
+		}
+	}
+	%sprite{
+		background-image: url(../images/sprite.png);
+		background-repeat: no-repeat;
+	}
+
+//==============================
+//Placeholders :END
+//==============================
+
+
+
+// - - - - - - - - - - - - - - - - - - -
+// - - mixins
+//==============================
+//Media Queries :START
+//==============================
+  @mixin mq_max($width){
+    @media only screen and (max-width: $width){@content;}
+  }
+  @mixin mq_min($width){
+    @media only screen and (min-width: $width + 1){@content;}
+  }
+  @mixin mq_min_max($min_width,$max_width){
+    @media only screen and (min-width: $min_width) and (max-width: $max_width){@content;}
+  }
+
+  @mixin mq($max,$min:false) {
+    @if $min==false {
+      @media only screen and (max-width: $max) {@content}
+    } @else if $max==0 {
+      @media only screen and (min-width: $min+1) {@content}
+    } @else {
+      @media only screen and (min-width: $min+1) and (max-width: $max) {@content}
+    }
+  }
+//==============================
+//Media Queries :END
+//==============================
+
+
+//==============================;
+//Z-Index :START
+//==============================
+//	Example array of z-indexes
+//  Should be placed in _vars.scss
+//;	$z-layers: (
+//		'navbar': 100,
+//	);
+  @function z($layer) {
+    @return map-get($z-layers, $layer);
+  }
+//==============================
+//Z-Index :END
+//==============================
+
+
+//==============================
+//Spriter :START
+//==============================
+  @mixin spriter($icon-xpos,$icon-width,$sprite-width,$icon-ypos:0,$icon-height:1,$sprite-height:1) {
+    $x: 0;
+    $y: 0;
+    @if $icon-xpos == 0 {
+      $x: 0;
+    } @else {
+      $x: ($icon-xpos / ($sprite-width - $icon-width))*100%;
+    }
+    @if $icon-ypos == 0 {
+      $y: 0;
+    } @else {
+      $y: ($icon-ypos / ($sprite-height - $icon-height))*100%;
+    }
+    background-position: $x $y;
+  }
+//==============================
+//Spriter :END
+//==============================
+
+
+//==============================
+//Boxer :START
+//==============================
+  @mixin boxer($x) {
+    &::after {
+      display: block;
+      content: '';
+      padding-top: $x * 1%;
+    }
+  }
+//==============================
+//Boxer :END
+//==============================
+
+
+//==============================
+//Font-face Generator :START
+//==============================
+  @mixin font-face($font-family, $file-path, $font-weight: normal, $font-style: normal) {
+    @font-face {
+      font-family: $font-family;
+      src: url('#{$file-path}.eot');
+      src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+        url('#{$file-path}.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        url('#{$file-path}.woff2') format('woff2'),
+        url('#{$file-path}.ttf') format('truetype');
+      font-weight: $font-weight;
+      font-style: $font-style;
+    }
+  }
+//==============================
+//Font-face Generator :END
+//==============================
+
+
+//==============================
+// Form Placeholder: START
+//==============================
+  @mixin placeholder{
+    &::-webkit-input-placeholder {
+       @content;
+    }
+    &:-moz-placeholder {
+       @content;
+    }
+    &::-moz-placeholder {
+       @content;
+    }
+    &:-ms-input-placeholder {
+       @content;
+    }
+  }
+//==============================
+// Form Placeholder: END
+//==============================
+
+//==============================
+// Overlay: START
+//==============================
+  @mixin overlay($pos,$color,$z_index: 0) {
+    &::#{$pos} {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $color;
+      z-index: $z_index;
+    }
+  }
+//==============================
+// Overlay: END
+//==============================
+
+//==============================
+// Centering: START
+//==============================
+  @mixin centered($vertical,$horizontal){
+    position: absolute;
+    @if($vertical and $horizontal){
+      left: 50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+    }
+    @elseif($vertical){
+      left:50%;
+      transform: translateX(-50%);
+    }
+    @elseif($horizontal){
+      top:50%;
+      transform: translateY(-50%);
+    }
+  }
+//==============================
+// Centering: END
+//==============================
+
+
+//========================================
+// Language Modifire :START
+//========================================
+  @mixin lang($code) {
+    :lang(#{$code}) & {
+      @content;
+    }
+  //	body.lang-#{$code} & {
+  //		@content;
+  //	}
+  }
+//========================================
+// Language Modifire :END
+//========================================
+
+// - - - - - - - - - - - - - - - - - - -
+// - - functions
+
+// - - - - - - - - - - - - - - - - - - -
+// - - utilities
