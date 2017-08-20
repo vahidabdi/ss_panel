@@ -1,0 +1,6 @@
+{
+  operators {
+    id
+    name
+  }
+}

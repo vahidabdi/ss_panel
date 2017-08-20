@@ -1,5 +1,0 @@
-query serviceType {
-  serviceType(id: 2) {
-    name
-  }
-}

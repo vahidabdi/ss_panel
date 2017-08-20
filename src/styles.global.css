@@ -1,3 +1,26 @@
 /* Regular @import url statements work as you'd expect them to -- alternatively
 you can import locally, and they wind up in the resulting bundle */
 @import url('https://fonts.googleapis.com/css?family=Gentium+Basic');
+
+
+.ReactTags__tags{
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #c1c1c1;
+  border-radius: 5px;
+  visibility: scroll;
+}
+.ReactTags__tag{
+  display: inline-block;
+  background-color: #75c997;
+  color: #fff;
+  padding:5px 15px;
+  border-radius: 10px;
+  margin: 0 0 10px 10px ;
+}
+.ReactTags__remove{
+  padding-right: 7px;
+  font-size: 18px;
+  cursor: pointer;
+}

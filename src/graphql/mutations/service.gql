@@ -1,0 +1,5 @@
+mutation ServiceCreation($name: String!, $description: String!, $TypeId: ID!, $picture: Upload, $help: String, $price: String, $operatorId: ID, $categoryId: ID) {
+  service(name: $name, description: $description, typeId: $TypeId, picture: $picture, help: $help, price: $price, operatorId: $operatorId, categoryId: $categoryId) {
+    id
+  }
+}

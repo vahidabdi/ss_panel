@@ -13,8 +13,10 @@ const Header = () => (
     </div>
     <div className={sass.header__btn} >
       <button className={sass.btn}>
-        <i className={sass['icon-plus']} />
+        <Link to="/dashboard/service">
+          <i className={sass['icon-plus']} />
 ایجاد سرویس
+        </Link>
       </button>
     </div>
   </div>
@@ -22,13 +24,11 @@ const Header = () => (
 
 export default Header;
 const AmbiguousExample = () => (
-  <Router>
-    <ul>
-      <li className={sass.header__nav_item}><Link to="/dashboard">صفحه اصلی</Link></li>
-      <li className={sass.header__nav_item}><Link to="/dashboard/services">سرویس ها</Link></li>
-      <li className={sass.header__nav_item}><Link to="/dashboard/baner">بنرها</Link></li>
-      <li className={sass.header__nav_item}><Link to="/dashboard/setting">تنظیمات</Link></li>
-      <li className={sass.header__nav_item}><Link to="/login">خروج</Link></li>
-    </ul>
-  </Router>
+  <ul>
+    <li className={sass.header__nav_item}><Link to="/dashboard">صفحه اصلی</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/services">سرویس ها</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/banner">بنرها</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/setting">تنظیمات</Link></li>
+    <li className={sass.header__nav_item}><Link to="/login">خروج</Link></li>
+  </ul>
 );

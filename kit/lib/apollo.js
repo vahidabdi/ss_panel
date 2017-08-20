@@ -4,7 +4,8 @@
 /* NPM */
 
 // Apollo client library
-import { createNetworkInterface, ApolloClient } from 'react-apollo';
+import { ApolloClient } from 'react-apollo';
+import { createNetworkInterface } from 'apollo-upload-client';
 
 /* ReactQL */
 import config from 'kit/config';

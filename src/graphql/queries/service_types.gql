@@ -1,0 +1,7 @@
+{
+  serviceTypes {
+    id
+    name
+    count
+  }
+}

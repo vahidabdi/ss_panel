@@ -1,0 +1,13 @@
+{
+  latestServices{
+    id
+    name
+    description
+    picture
+ 		view
+    type {
+      id
+      name
+    }
+  }
+}

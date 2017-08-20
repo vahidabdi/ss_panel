@@ -1,0 +1,28 @@
+.card-c{
+background-color: #fff;
+  margin:5px;
+
+  &__img-box{
+    width: 100%;
+    height: 130px;
+    margin-bottom: 15px;
+    img{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__name{
+    display: inline-block;
+    margin-bottom: 15px;
+
+  }
+  &__icon{
+    display: inline-block;
+    float: left;
+    margin: 5px 7px 0 2px;
+    &:before{
+      color:#898989
+    }
+  }
+}

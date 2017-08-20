@@ -1,3 +1,41 @@
 // - - - - - - - - - - - - - - - - - - -
 // - - skin
 // global skin styles - gradients, colors, box-shadows, etc.
+
+
+.block{
+  display: block;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+.mr-auto{
+  margin: auto;
+}
+.mr_0{
+  margin-right: 0!important;
+}
+.pd_10{
+  padding: 10px;
+}
+.item{
+  &_8{
+    flex:8;
+  }
+  &_4{
+    flex:4;
+    .services &{
+      margin-right:5px;
+      margin-bottom: 5px;
+    }
+
+  }
+  &_6{
+    flex:6;
+  }
+}
+.w90{
+  width:100%;
+}

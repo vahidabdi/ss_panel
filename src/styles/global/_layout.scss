@@ -4,7 +4,7 @@
 
 body {
   color: $color_text;
-  background-color: #eee;
+  background-color: #987897;
   @extend %body-fa;
   &.menu {
     @include mq_max($sm) {
@@ -52,7 +52,7 @@ body {
       max-width:920px;
 
     }
-    &.section--xs {
+   .section--xs   &{
       max-width:500px;
     }
     &.secction--relative{
@@ -80,7 +80,20 @@ body {
   }
 &__main{
     position: relative;
+    display: flex;
+    .services &{
+      flex-direction: column;
+    }
+    .banner &{
+      display: block;
+    }
+
   }
-
-
+  &__title{
+    font-size: 16px;
+    .services &{
+    margin: auto;
+    text-align: center;
+    }
+  }
 }

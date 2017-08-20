@@ -31,6 +31,7 @@ import React from 'react';
 // Routing via React Router
 import {
   Route,
+  Switch,
 } from 'react-router-dom';
 
 // <Helmet> component for setting the page title/meta tags
@@ -43,6 +44,10 @@ import RequireAuth from 'src/components/requireAuth';
 import Login from 'src/components/login';
 import Dashboard from 'src/components/dashboard';
 import Setting from 'src/components/setting';
+import Service from 'src/components/service';
+import Services from 'src/components/services';
+import Banner from 'src/components/banner';
+
 
 // ----------------------
 
@@ -54,10 +59,14 @@ export default () => (
         name: 'description',
         content: 'ReactQL starter kit app',
       }]} />
-    <Route exact path="/" component={Login} />
-
-    <Route path="/dashboard" component={Dashboard} />
-    <Route path="/dashboard/setting" component={Setting} />
-
+    <Switch>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/dashboard" component={RequireAuth(Dashboard)} />
+      <Route exact path="/dashboard/setting" component={RequireAuth(Setting)} />
+      <Route exact path="/dashboard/services" component={RequireAuth(Services)} />
+      <Route exact path="/dashboard/service" component={RequireAuth(Service)} />
+      <Route exact path="/dashboard/service/:service_id" component={RequireAuth(Service)} />
+      <Route exact path="/dashboard/banner" component={RequireAuth(Banner)} />
+    </Switch>
   </div>
 );

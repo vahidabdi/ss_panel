@@ -1,0 +1,48 @@
+.form {
+background-color: #fff;
+padding: 10px 50px;
+
+input,select{
+  padding: 5px;
+  border: 1px solid #c1c1c1;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+input[type=file]{
+  min-height: 36px;
+}
+input[type=text], input[type=submit], input[type=number]{
+ width: 100%;
+}
+h2,h3,h4,label,select{
+  font: normal normal 14px/1.7 'IRANSans', 'Tahoma', 'Arial';
+  color: #676767;
+}
+&__textarea{
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid #c1c1c1;
+  border-radius: 5px;
+    margin: 10px 0;
+}
+&__title{
+  color: #000;
+}
+
+&__submit{
+
+  >input{
+    background-color: #4e99d3;
+    color: #fff;
+    padding:10px 15px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    &:hover{
+      background-color: #3c78a7
+    }
+  }
+
+}
+
+}

@@ -79,6 +79,7 @@
   "dependencies": {
     "apollo-local-query": "^0.3.0",
     "apollo-server-koa": "^1.0.5",
+    "apollo-upload-client": "^5.1.1",
     "boxen": "^1.2.1",
     "chalk": "^2.0.1",
     "graphql": "^0.10.5",
@@ -100,6 +101,7 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-tag-input": "^4.7.2",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
     "regenerator-runtime": "^0.10.5",

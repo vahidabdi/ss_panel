@@ -1,0 +1,21 @@
+.card-b{
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+&__box{
+flex:3;
+flex-direction: column;
+display: flex;
+text-align: center;
+}
+&__icon{
+flex:1;
+}
+&__title{
+color: #cccccc;
+font-size: 12px;
+}
+&__number{
+
+}
+}

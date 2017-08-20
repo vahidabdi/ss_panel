@@ -1,14 +1,35 @@
 import React from 'react';
 import sass from 'src/styles/index.scss';
-import Header from 'src/components/header';
+import ServiceTypes from 'src/components/serviceTypes';
+import LatestServices from 'src/components/latestServices';
 
 const Dashboard = () => (
-  <div className={`${sass['page-wrap']} ${sass['dashboard-page']}`}>
-    <header className={`${sass.section} ${sass.header}`}>
-      <div className={sass.section__wrap}>
-        <Header />
+  <div className={`${sass.section} ${sass.graph}`}>
+    <div className={sass.section__wrap}>
+      <div className={sass.section__main}>
+        <div className={sass.item_4}>
+          <ServiceTypes />
+        </div>
+        <div className={sass.item_8}>
+          item2
+        </div>
       </div>
-    </header>
+      <div className={sass.section__main}>
+        <div className={sass.item_6}>
+          <LatestServices />
+        </div>
+        <div className={sass.item_6}>
+          <div className={sass.section__main}>
+            <div className={sass.item_6}>
+              <ServiceTypes />
+            </div>
+            <div className={sass.item_6}>
+              item2
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 );
 
