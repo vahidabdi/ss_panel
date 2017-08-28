@@ -12,12 +12,10 @@ const Header = () => (
       <input type="text" name="search" placeholder="جستجو" />
     </div>
     <div className={sass.header__btn} >
-      <button className={sass.btn}>
-        <Link to="/dashboard/service">
-          <i className={sass['icon-plus']} />
+      <Link className={sass.btn} to="/dashboard/service">
+        <i className={sass['icon-plus']} />
 ایجاد سرویس
-        </Link>
-      </button>
+      </Link>
     </div>
   </div>
 );
@@ -28,6 +26,7 @@ const AmbiguousExample = () => (
     <li className={sass.header__nav_item}><Link to="/dashboard">صفحه اصلی</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/services">سرویس ها</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/banner">بنرها</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/feature">فیچر</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/setting">تنظیمات</Link></li>
     <li className={sass.header__nav_item}><Link to="/login">خروج</Link></li>
   </ul>

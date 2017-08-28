@@ -14,6 +14,13 @@ input[type=file]{
 input[type=text], input[type=submit], input[type=number]{
  width: 100%;
 }
+// button[type=submit]{
+//   opacity: 0;
+//   cursor: auto;
+// }
+label{
+  display: block;
+}
 h2,h3,h4,label,select{
   font: normal normal 14px/1.7 'IRANSans', 'Tahoma', 'Arial';
   color: #676767;
@@ -31,7 +38,8 @@ h2,h3,h4,label,select{
 }
 
 &__submit{
-
+// opacity: 0;
+// cursor:auto ;
   >input{
     background-color: #4e99d3;
     color: #fff;
@@ -42,7 +50,8 @@ h2,h3,h4,label,select{
       background-color: #3c78a7
     }
   }
-
 }
+}
+.form_typeid{
 
 }

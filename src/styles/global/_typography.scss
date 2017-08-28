@@ -74,15 +74,27 @@
 .icon-cancel:after {
   content: "\e904";
   color: #fff	;
+	.ReactModal__Content &{
+		color: #4e99d3;
+	}
+}
+.icon-cancel3:after {
+  content: "\e904";
+  color: #4e99d3	;
 }
 
 .icon-edit:before {
   content: "\e902";
 	color: #8a8a8a;
+	margin: 0 5px;
+	.graph &{
+		margin: 0 1px;
+	}
 }
 .icon-delete:before {
   content: "\e903";
   color: #ababab;
+	margin: 0 5px;
 }
 .icon-plus:before{
   content: "\e900";

@@ -1,0 +1,5 @@
+mutation serviceCategory_New($name: String!) {
+  serviceCategory(name: $name) {
+    id
+  }
+}

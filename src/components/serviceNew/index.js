@@ -1,11 +1,13 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import sass from 'src/styles/index.scss';
+import { withRouter } from 'react-router';
 import serviceMutation from 'src/graphql/mutations/service.gql';
-import serviceTypes from 'src/graphql/queries/service_types.gql';
 import { WithContext as ReactTags } from 'react-tag-input';
+import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
+import query from 'src/graphql/queries/latest_services.gql';
 
-// @graphql(serviceTypes)
+@graphql(ServiceNewQuery)
 @graphql(serviceMutation)
 class ServiceNew extends React.Component {
   constructor(props) {
@@ -13,21 +15,26 @@ class ServiceNew extends React.Component {
     this.state = {
       name: '',
       description: '',
-      feature: false,
-      activation_code: '',
-      picture: '',
-      deactivation_code: '',
+      isFeatured: false,
+      activation: '',
+      activation_number: '',
+      deactivation: '',
+      picture: {},
       help: '',
       tags: [],
-      tags_val: [],
       price: '',
       expirate_date: '',
+      category_id: null,
+      operator_id: null,
+      type_id: null,
+      status: true,
     };
 
     this.submitForm = this.submitForm.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
+    this.handleRadio = this.handleRadio.bind(this);
   }
 
   submitForm(e) {
@@ -35,17 +42,23 @@ class ServiceNew extends React.Component {
     this.props.mutate({
       variables: {
         name: this.state.name,
-        description: 'this.state.description',
-        feature: this.state.feature,
+        description: this.state.description,
+        isFeatured: this.state.isFeatured,
         help: this.state.help,
-        actiovation_code: this.state.activation_code,
-        deactiovation_code: this.state.deactivation_code,
+        activation: this.state.activation,
+        activation_number: this.state.activation_number,
+        deactivation: this.state.deactivation,
         tags: this.state.tags.map(i => i.text),
         expirate_date: this.state.expirate_date,
-        TypeId: 2,
+        TypeId: this.state.type_id,
         picture: this.state.picture,
+        category_id: this.state.category_id,
+        price: this.state.price,
+        status: this.state.status,
       },
-    });
+      refetchQueries: [{ query }],
+    })
+      .then(this.props.history.push('/dashboard'));
   }
 
   handleDelete(i) {
@@ -73,7 +86,17 @@ class ServiceNew extends React.Component {
     this.setState({ tags });
   }
 
+  handleRadio(e) {
+    // console.log(e.currentTarget.name);
+    this.setState({ [`${e.currentTarget.name}`]: e.currentTarget.value });
+  }
+
   render() {
+    console.log(this.state.picture);
+    const { data } = this.props;
+    if (data.loading) {
+      return null;
+    }
     const { tags } = this.state;
     return (
       <div>
@@ -85,20 +108,35 @@ class ServiceNew extends React.Component {
                 <div className={sass.flex}>
                   <div className={sass.item_8}>
                     <input
-                      className={`${sass.block}  ${sass.w90}`}
+                      className={`${sass.block} ${sass.w90}`}
                       type="text"
                       name="name"
                       id="f1"
                       onChange={e => this.setState({ name: e.target.value })} />
                   </div>
-                  <div className={`${sass.item_4}  ${sass.pd_10}`}>
-                    <input
-                      type="checkbox"
-                      name="feature"
-                      value
-                      id="f2"
-                      onChange={e => this.setState({ feature: e.target.checked })} />
-                    <label className={sass.pd_10} htmlFor="f2">فیچر</label>
+                  <div className={`${sass.item_4} ${sass.pd_10}`}>
+                    <label className={sass.pd_10} htmlFor="f2">
+                      <input
+                        type="checkbox"
+                        name="isFeatured"
+                        value
+                        checked={this.state.isFeatured}
+                        id="f2"
+                        onChange={e => this.setState({ isFeatured: e.target.checked })} />
+                      <span>فیچر</span>
+                    </label>
+                  </div>
+                  <div className={`${sass.item_4} ${sass.pd_10}`}>
+                    <label className={sass.pd_10} htmlFor="status">
+                      <input
+                        type="checkbox"
+                        name="status"
+                        value
+                        checked={this.state.status}
+                        id="status"
+                        onChange={e => this.setState({ status: e.target.checked })} />
+                      <span>وضعیت</span>
+                    </label>
                   </div>
                 </div>
               </div>
@@ -111,23 +149,39 @@ class ServiceNew extends React.Component {
                   id="f3"
                   onChange={e => this.setState({ description: e.target.value })} />
               </div>
-              <div className={sass.flex}>
+              <div className={`${sass.flex} ${sass.flex_baseline}`}>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
                   <h4 className={sass.form__title}>اپراتور</h4>
-                  <div className={sass.pd_10}>
-                    <input id="rb1" type="radio" name="operator" value="irancell" />  <label htmlFor="rb1">ایرانسل</label><br />
-                    <input id="rb2" type="radio" name="operator" value="hamrahaval" />  <label htmlFor="rb2">همراه اول</label><br />
-                    <input id="rb3" type="radio" name="operator" value="rightell" />   <label htmlFor="rb3">رایتل</label><br />
-                    <input id="rb4" type="radio" name="operator" value="tallia" />   <label htmlFor="rb4">تالیا</label>
+                  <div className={sass.pd_10} >
+                    {data.operators.map(st => (
+                      <label key={`operator_${st.id}`} htmlFor={`operator_${st.id}`}>
+                        <input
+                          id={`operator_${st.id}`}
+                          type="radio"
+                          name="operator_id"
+                          checked={this.state.operator_id === st.id}
+                          value={st.id}
+                          onChange={this.handleRadio} />
+                        <span>{st.name}</span>
+                      </label>),
+                    )}
                   </div>
                 </div>
                 <div className={sass.item_6}>
                   <h4 className={sass.form__title}>نوع سرویس</h4>
                   <div className={sass.pd_10}>
-                    <input id="rb21" type="radio" name="typeService" value="payment" />  <label htmlFor="rb21">payment</label><br />
-                    <input id="rb22" type="radio" name="typeService" value="telegram" />  <label htmlFor="rb22">telegram</label><br />
-                    <input id="rb23" type="radio" name="typeService" value="USSD" />   <label htmlFor="rb23">USSD</label><br />
-                    <input id="rb24" type="radio" name="typeService" value="SMS" />   <label htmlFor="rb24">SMS</label>
+                    {data.serviceTypes.map(st => (
+                      <label key={`serviceType_${st.id}`} htmlFor={`serviceType_${st.id}`}>
+                        <input
+                          id={`serviceType_${st.id}`}
+                          type="radio"
+                          name="type_id"
+                          checked={this.state.type_id === st.id}
+                          value={st.id}
+                          onChange={this.handleRadio} />
+                        <span>{st.name}</span>
+                      </label>),
+                    )}
                   </div>
                 </div>
               </div>
@@ -135,9 +189,13 @@ class ServiceNew extends React.Component {
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
                   <h4 className={sass.form__title}>موضوع</h4>
                   <div>
-                    <select className={sass.w90}>
-                      <option value="">آموزشی</option>
-                      <option value="">غیر آموزشی</option>
+                    <select
+                      className={sass.w90}
+                      name="categorie"
+                      onChange={e => this.setState({ category_id: e.target.value })} >
+                      {data.categories.map(st =>
+                        <option key={st.id} value={st.id}>{st.name}</option>,
+                      )}
                     </select>
                   </div>
                 </div>
@@ -162,9 +220,9 @@ class ServiceNew extends React.Component {
                     <input
                       className={`${sass.block}  ${sass.w90}`}
                       type="text"
-                      name="actiovation_code"
+                      name="activation"
                       id="txt1"
-                      onChange={e => this.setState({ actiovation_code: e.target.value })} />
+                      onChange={e => this.setState({ activation: e.target.value })} />
                   </div>
                 </div>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
@@ -175,11 +233,31 @@ class ServiceNew extends React.Component {
                     <input
                       className={`${sass.block} ${sass.w90}`}
                       type="text"
-                      name="deactiovation_code"
+                      name="deactivation"
                       id="txt2"
-                      onChange={e => this.setState({ deactiovation_code: e.target.value })} />
+                      onChange={e => this.setState({ deactivation: e.target.value })} />
                   </div>
                 </div>
+                {(true) ? (
+                  <div className={`${sass.item_6} ${sass.pd_10}`}>
+                    <div>
+                      <h4 className={sass.form__title}>
+                        <label className={sass.block} htmlFor="txt13">شماره فعالسازی</label>
+                      </h4>
+                      <div>
+                        <input
+                          className={`${sass.block} ${sass.w90}`}
+                          type="text"
+                          name="activation_number"
+                          id="txt13"
+                          onChange={e => this.setState({ activation_number: e.target.value })} />
+                      </div>
+                    </div>
+                </div>
+                ) : (
+                      <h2></h2>
+                    )}
+
               </div>
 
               <div className={sass.flex}>
@@ -222,9 +300,10 @@ class ServiceNew extends React.Component {
                   <div>
                     <input
                       className={`${sass.block}  ${sass.w90}`}
-                      type="number"
-                      name=""
-                      id="txt4" />
+                      type="text"
+                      name="price"
+                      id="txt4"
+                      onChange={e => this.setState({ price: e.target.value })} />
                   </div>
                 </div>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
@@ -256,4 +335,4 @@ class ServiceNew extends React.Component {
   }
 }
 
-export default ServiceNew;
+export default withRouter(ServiceNew);

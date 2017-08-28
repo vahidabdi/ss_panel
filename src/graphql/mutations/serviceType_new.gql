@@ -1,0 +1,5 @@
+mutation serviceType_New($name: String! ,$engName: String! ,$hasSubCat: Boolean ) {
+  serviceType(name: $name, engName: $engName, hasSubCat: $hasSubCat) {
+    id
+  }
+}

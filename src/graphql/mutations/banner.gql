@@ -1,0 +1,5 @@
+mutation Banner($picture: Upload!, $serviceId: ID!) {
+  banner(picture: $picture, serviceId: $serviceId) {
+    id
+  }
+}

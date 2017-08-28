@@ -1,17 +1,38 @@
 import React from 'react';
+import { graphql } from 'react-apollo';
 import sass from 'src/styles/index.scss';
+import config from 'kit/config';
+import mutation from 'src/graphql/mutations/removeBanner.gql';
+import query from 'src/graphql/queries/banners.gql';
 
-const BannerItem = () => (
-  <div className={sass['card-c']}>
-    <div className={sass['card-c__img-box']}>
-      <img src="http://localhost:8080/static/images/pic20.jpg" alt="describtion" />
-    </div>
-    <h2 className={sass['card-c__name']}>
-      سرویس تکنیکهای ثروتمند شدن
-    </h2>
-    <button className={`${sass['card-c__icon']} ${sass['icon-edit']}`} />
-    <button className={`${sass['card-c__icon']} ${sass['icon-delete']}`} />
-  </div>
-);
+@graphql(mutation)
+class BannerItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.removeBanner = this.removeBanner.bind(this);
+  }
+
+  removeBanner() {
+    this.props.mutate({
+      variables: { BannerId: this.props.x.id },
+      refetchQueries: [{ query }],
+    });
+  }
+  render() {
+    return (
+      <div className={sass['card-c']}>
+        <div className={sass['card-c__img-box']}>
+          <img src={`${config.graphQLEndpoint}/${this.props.x.thumb}`} alt="panel" />
+        </div>
+        <h2 className={sass['card-c__name']}>
+          {this.props.x.id}
+        </h2>
+        <button className={`${sass['card-c__icon']} ${sass['icon-edit']}`} />
+        <button onClick={this.removeBanner} className={`${sass['card-c__icon']} ${sass['icon-delete']}`} />
+      </div>
+
+    );
+  }
+}
 
 export default BannerItem;

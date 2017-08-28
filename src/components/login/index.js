@@ -59,6 +59,11 @@ class Login extends React.Component {
               type="password"
               placeholder="پسورد"
               onChange={event => this.setState({ password: event.target.value })} />
+            <input
+              name="remember"
+              value={this.state.password}
+              type="checkbox"
+              onChange={event => this.setState({ remember: event.target.value })} />
             <input type="submit" value="ورود" />
             {this.renderError()}
           </form>

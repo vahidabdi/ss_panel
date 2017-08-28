@@ -1,0 +1,14 @@
+{
+  operators {
+    id
+    name
+  }
+  categories {
+    id
+    name
+  }
+  serviceTypes {
+    id
+    name
+ }
+}

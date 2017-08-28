@@ -1,0 +1,10 @@
+{
+  banners{
+    id
+    thumb
+    original
+    service {
+      id
+    }
+  }
+}

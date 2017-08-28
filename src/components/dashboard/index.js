@@ -2,6 +2,7 @@ import React from 'react';
 import sass from 'src/styles/index.scss';
 import ServiceTypes from 'src/components/serviceTypes';
 import LatestServices from 'src/components/latestServices';
+import ViewService from 'src/components/viewService';
 
 const Dashboard = () => (
   <div className={`${sass.section} ${sass.graph}`}>
@@ -11,7 +12,7 @@ const Dashboard = () => (
           <ServiceTypes />
         </div>
         <div className={sass.item_8}>
-          item2
+          <ViewService />
         </div>
       </div>
       <div className={sass.section__main}>
@@ -24,7 +25,7 @@ const Dashboard = () => (
               <ServiceTypes />
             </div>
             <div className={sass.item_6}>
-              item2
+              <ServiceTypes />
             </div>
           </div>
         </div>

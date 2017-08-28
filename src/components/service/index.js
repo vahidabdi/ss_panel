@@ -10,7 +10,7 @@ const Service = ({ match }) => (
       <div className={sass.section__main}>
         <div>{match.params.service_id}</div>
         {!(match.params.service_id == null) ? (
-          <ServiceEdit />
+          <ServiceEdit srv={match.params.service_id} />
         ) : (
           <ServiceNew />
         )}

@@ -1,146 +1,360 @@
 import React from 'react';
+import { graphql } from 'react-apollo';
+import query from 'src/graphql/queries/getService.gql';
+import serviceMutation from 'src/graphql/mutations/service.gql';
 import sass from 'src/styles/index.scss';
 import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
 
-const ServiceEdit = () => (
+@graphql(serviceMutation)
+@graphql(query, { options: props => ({ variables: { ID: props.match.params.service_id } }) })
+class ServiceEdit extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      service_id: props.match.params.service_id,
+      name: '',
+      description: '',
+      isFeatured: false,
+      activation: '',
+      activation_number: '',
+      deactivation: '',
+      picture: {},
+      help: '',
+      tags: [],
+      price: '',
+      expirate_date: '',
+      category_id: null,
+      operator_id: null,
+      type_id: null,
+      status: true,
+    };
 
+    this.submitForm = this.submitForm.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+    this.handleRadio = this.handleRadio.bind(this);
+  }
 
-  
-  <div>
-    <h3 className={sass.section__title}> سرویس مهارت گفتن و شنیدن </h3>
-    <div className={sass.flex}>
-      <div className={`${sass.item_4} ${sass.mr_0}`}>
-        <ServiceStatics x={{ view: 800 }} title="دفعات بازدید سرویس" icon={sass.icon_eye} />
-      </div>
-      <div className={sass.item_4}>
-        <ServiceStatics x={{ view: 800 }} title=" تعداد دفعات اجرای سرویس " icon={sass.icon_check} />
-      </div>
-      <div className={sass.item_4}>
-        <ServiceStatics x={{ view: 800 }} title="دفعات لغو سرویس" icon={sass.icon_cancel2} />
-      </div>
-    </div>
-    <div>
-      <div className={sass.form}>
-        <form >
-          <div className={sass.pd_10}>
-            <label className={sass.block} htmlFor="f1">نام سرویس</label>
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.data.loading) {
+      const { name, description, isFeatured, status, activation, activationNumber, help, price, typeId, tags } = nextProps.data.service;
+      const newTags = tags.map((v, i) => (
+        { id: i, text: v }
+      ));
+      this.setState({ name, description, isFeatured, status, activation, activationNumber, help, price, typeId, tags: newTags });
+    }
+  }
+
+  submitForm(e) {
+    e.preventDefault();
+    this.props.mutate({
+      variables: {
+        service_id: this.state.service_id,
+        name: this.state.name,
+        description: this.state.description,
+        isFeatured: this.state.isFeatured,
+        help: this.state.help,
+        activation: this.state.activation,
+        activation_number: this.state.activation_number,
+        deactivation: this.state.deactivation,
+        tags: this.state.tags.map(i => i.text),
+        expirate_date: this.state.expirate_date,
+        TypeId: this.state.type_id,
+        picture: this.state.picture,
+        category_id: this.state.category_id,
+        price: this.state.price,
+        status: this.state.status,
+      },
+      refetchQueries: [{ query }],
+    })
+      .then(this.props.history.push('/dashboard'));
+  }
+
+  handleDelete(i) {
+    const tags = this.state.tags;
+    tags.splice(i, 1);
+    this.setState({ tags });
+  }
+
+  handleAddition(tag) {
+    const tags = this.state.tags;
+    tags.push({
+      id: tags.length + 1,
+      text: tag,
+    });
+    this.setState({ tags });
+  }
+
+  handleDrag(tag, currPos, newPos) {
+    const tags = this.state.tags;
+
+    // mutate array
+    tags.splice(currPos, 1);
+    tags.splice(newPos, 0, tag);
+    // re-render
+    this.setState({ tags });
+  }
+
+  handleRadio(e) {
+    // console.log(e.currentTarget.name);
+    this.setState({ [`${e.currentTarget.name}`]: e.currentTarget.value });
+  }
+
+  render() {
+    const { data } = this.props;
+    if (data.loading) {
+      return null;
+    }
+    const { tags } = this.state;
+    const { service } = this.props.data;
+    return (
+      <div className={`${sass.section} ${sass.services} ${sass['section--sm']}`}>
+        <div className={sass.section__wrap}>
+          <div className={sass.section__main}>
+            <h3 className={sass.section__title}> سرویس مهارت گفتن و شنیدن </h3>
             <div className={sass.flex}>
-              <div className={sass.item_8}>
-                <input className={`${sass.block}  ${sass.w90}`} type="text" name="name" id="f1" />
+              <div className={`${sass.item_4} ${sass.mr_0}`}>
+                <ServiceStatics count={service.view} title="دفعات بازدید سرویس" icon={sass.icon_eye} />
               </div>
-              <div className={`${sass.item_4}  ${sass.pd_10}`}>
-                <input type="checkbox" name="ficher" value="ficher" id="f2" />
-                <label className={sass.pd_10} htmlFor="f2">فیچر</label>
+              <div className={sass.item_4}>
+                <ServiceStatics count={12} title=" تعداد دفعات اجرای سرویس " icon={sass.icon_check} />
+              </div>
+              <div className={sass.item_4}>
+                <ServiceStatics count={service.like} title="تعداد لایک" icon={sass.icon_cancel2} />
+              </div>
+            </div>
+            <div>
+              <div className={sass.form}>
+                <form onSubmit={this.submitForm}>
+                  <div className={sass.pd_10}>
+                    <label className={sass.block} htmlFor="nameGet">نام سرویس</label>
+                    <div className={sass.flex}>
+                      <div className={sass.item_8}>
+                        <input
+                          className={`${sass.block} ${sass.w90}`}
+                          type="text"
+                          name="name"
+                          id="nameGet"
+                          value={this.state.name}
+                          onChange={e => this.setState({ name: e.target.value })} />
+                      </div>
+                      <div className={`${sass.item_4} ${sass.pd_10}`}>
+                        <label className={sass.pd_10} htmlFor="isFeatureGet">
+                          <input
+                            type="checkbox"
+                            name="isFeatured"
+                            value
+                            checked={this.state.isFeatured}
+                            id="isFeatureGet"
+                            onChange={e => this.setState({ isFeatured: e.target.checked })} />
+                          <span>فیچر</span>
+                        </label>
+                      </div>
+                      <div className={`${sass.item_4} ${sass.pd_10}`}>
+                        <label className={sass.pd_10} htmlFor="status">
+                          <input
+                            type="checkbox"
+                            name="status"
+                            checked={this.state.status}
+                            id="status"
+                            onChange={e => this.setState({ status: e.target.checked })} />
+                          <span>وضعیت</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={sass.pd_10}>
+                    <label htmlFor="descriptionGet"> توضیحات</label>
+                    <textarea
+                      className={`${sass.block} ${sass.pd_10} ${sass.form__textarea}`}
+                      type="checkbox"
+                      name="description"
+                      value={this.state.description}
+                      id="descriptionGet"
+                      onChange={e => this.setState({ description: e.target.value })} />
+                  </div>
+                  <div className={`${sass.flex} ${sass.flex_baseline}`}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>اپراتور</h4>
+                      <div className={sass.pd_10} >
+                        {data.operators.map(st => (
+                          <label key={`operator_${st.id}`} htmlFor={`operator_${st.id}`}>
+                            <input
+                              id={`operator_${st.id}`}
+                              type="radio"
+                              name="operator_id"
+                              checked={this.state.operator_id === st.id}
+                              value={st.id}
+                              onChange={this.handleRadio} />
+                            <span>{st.name}</span>
+                          </label>),
+                        )}
+                      </div>
+                    </div>
+                    <div className={sass.item_6}>
+                      <h4 className={sass.form__title}>نوع سرویس</h4>
+                      <div className={sass.pd_10}>
+                        {data.serviceTypes.map(st => (
+                          <label key={`serviceType_${st.id}`} htmlFor={`serviceType_${st.id}`}>
+                            <input
+                              id={`serviceType_${st.id}`}
+                              type="radio"
+                              name="type_id"
+                              checked={this.state.type_id === st.id}
+                              value={st.id}
+                              onChange={this.handleRadio} />
+                            <span>{st.name}</span>
+                          </label>),
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={sass.flex}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>موضوع</h4>
+                      <div>
+                        <select
+                          className={sass.w90}
+                          name="categorie"
+                          onChange={e => this.setState({ category_id: e.target.value })} >
+                          {data.categories.map(st =>
+                            <option key={`category_${st.id}`} value={st.id}>{st.name}</option>,
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}> انتخاب عکس</h4>
+                      <div>
+                        <input
+                          className={sass.w90}
+                          type="file"
+                          name="picture"
+                          accept={'image/jpeg,image/png,image/jpg'}
+                          onChange={e => this.setState({ picture: e.target.files[0] })} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={sass.flex}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>
+                        <label className={sass.block} htmlFor="activationGet">کدفعالسازی</label>
+                      </h4>
+                      <div>
+                        <input
+                          className={`${sass.block}  ${sass.w90}`}
+                          type="text"
+                          name="activation"
+                          id="activationGet"
+                          value={this.state.activation}
+                          onChange={e => this.setState({ activation: e.target.value })} />
+                      </div>
+                    </div>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>
+                        <label className={sass.block} htmlFor="deactivationGet">کد غیرفعالسازی</label>
+                      </h4>
+                      <div>
+                        <input
+                          className={`${sass.block} ${sass.w90}`}
+                          type="text"
+                          name="deactivation"
+                          id="deactivationGet"
+                          value={this.state.deactivation}
+                          onChange={e => this.setState({ deactivation: e.target.value })} />
+                      </div>
+                    </div>
+                    {(true) ? (
+                      <div className={`${sass.item_6} ${sass.pd_10}`}>
+                        <div>
+                          <h4 className={sass.form__title}>
+                            <label className={sass.block} htmlFor="activationNumGet">شماره فعالسازی</label>
+                          </h4>
+                          <div>
+                            <input
+                              className={`${sass.block} ${sass.w90}`}
+                              type="text"
+                              name="activation_number"
+                              id="activationNumGet"
+                              value={this.state.activation_number}
+                              onChange={e => this.setState({ activation_number: e.target.value })} />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <h2 />
+                    )}
+                  </div>
 
+                  <div className={sass.flex}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>
+                        <label className={sass.block} htmlFor="helpGet">راهنما</label>
+                      </h4>
+                      <div>
+                        <textarea
+                          className={`${sass.block}  ${sass.form__textarea}`}
+                          type="textarea"
+                          name="help"
+                          id="helpGet"
+                          value={this.state.help}
+                          onChange={e => this.setState({ help: e.target.value })} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={sass.flex}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>
+                        برچسب ها
+                      </h4>
+                      <div>
+                        <ReactTags
+                          tags={tags}
+                          placeholder="برچسب"
+                          handleDelete={this.handleDelete}
+                          handleAddition={this.handleAddition}
+                          handleDrag={this.handleDrag}
+                          autofocus={false} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={sass.flex}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>
+                        <label className={sass.block} htmlFor="txt4">قیمت</label>
+                      </h4>
+                      <div>
+                        <input
+                          className={`${sass.block}  ${sass.w90}`}
+                          type="text"
+                          name="price"
+                          id="txt4"
+                          value={this.state.price}
+                          onChange={e => this.setState({ price: e.target.value })} />
+                      </div>
+                    </div>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <h4 className={sass.form__title}>
+                        <label className={sass.block} htmlFor="txt5">تاریخ انقضا</label>
+                      </h4>
+                    </div>
+                  </div>
+                  <div className={`${sass.form__submit} ${sass.pd_10}`}>
+                    <input
+                      className={sass.w90}
+                      type="submit"
+                      value="ارسال" />
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-          <div className={sass.pd_10}>
-            <label htmlFor="f3"> توضیحات</label>
-            <textarea className={`${sass.block} ${sass.pd_10} ${sass.form__textarea}`} type="checkbox" name="discribtion" id="f3" />
-          </div>
-          <div className={sass.flex}>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>اپراتور</h4>
-              <div className={sass.pd_10}>
-                <input id="rb1" type="radio" name="operator" value="irancell" />  <label htmlFor="rb1">ایرانسل</label><br />
-                <input id="rb2" type="radio" name="operator" value="hamrahaval" />  <label htmlFor="rb2">همراه اول</label><br />
-                <input id="rb3" type="radio" name="operator" value="rightell" />   <label htmlFor="rb3">رایتل</label><br />
-                <input id="rb4" type="radio" name="operator" value="tallia" />   <label htmlFor="rb4">تالیا</label>
-              </div>
-            </div>
-            <div className={sass.item_6}>
-              <h4 className={sass.form__title}>نوع سرویس</h4>
-              <div className={sass.pd_10}>
-                <input id="rb21" type="radio" name="typeService" value="payment" />  <label htmlFor="rb21">payment</label><br />
-                <input id="rb22" type="radio" name="typeService" value="telegram" />  <label htmlFor="rb22">telegram</label><br />
-                <input id="rb23" type="radio" name="typeService" value="USSD" />   <label htmlFor="rb23">USSD</label><br />
-                <input id="rb24" type="radio" name="typeService" value="SMS" />   <label htmlFor="rb24">SMS</label>
-              </div>
-            </div>
-          </div>
-          <div className={sass.flex}>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>موضوع</h4>
-              <div>
-                <select className={sass.w90}>
-                  <option value="">آموزشی</option>
-                  <option value="">غیر آموزشی</option>
-                </select>
-              </div>
-            </div>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}> انتخاب عکس</h4>
-              <div>
-                <input className={sass.w90} type="file" name="pic" accept="image/*" />
-              </div>
-            </div>
-          </div>
-          <div className={sass.flex}>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>
-                <label className={sass.block} htmlFor="txt1">کدفعالسازی</label>
-              </h4>
-              <div>
-                <input className={`${sass.block}  ${sass.w90}`} type="text" name="name" id="txt1" />
-              </div>
-            </div>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>
-                <label className={sass.block} htmlFor="txt2">کد غیرفعالسازی</label>
-              </h4>
-              <div>
-                <input className={`${sass.block} ${sass.w90}`} type="text" name="name" id="txt2" />
-              </div>
-            </div>
-          </div>
-
-          <div className={sass.flex}>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>
-                <label className={sass.block} htmlFor="txt3">راهنما</label>
-              </h4>
-              <div>
-                <textarea className={`${sass.block}  ${sass.form__textarea}`} type="checkbox" name="help" id="txt3" />
-              </div>
-            </div>
-          </div>
-          <div className={sass.flex}>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>
-                برچسب ها
-              </h4>
-              <div>
-                <ReactTag />
-              </div>
-            </div>
-          </div>
-          <div className={sass.flex}>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>
-                <label className={sass.block} htmlFor="txt4">قیمت</label>
-              </h4>
-              <div>
-                <input className={`${sass.block}  ${sass.w90}`} type="number" name="name" id="txt4" />
-              </div>
-            </div>
-            <div className={`${sass.item_6} ${sass.pd_10}`}>
-              <h4 className={sass.form__title}>
-                <label className={sass.block} htmlFor="txt5">تاریخ انقضا</label>
-              </h4>
-              <div>
-                <input className={`${sass.block}  ${sass.w90}`} type="text" name="name" id="txt5" />
-              </div>
-            </div>
-          </div>
-          <div className={`${sass.form__submit} ${sass.pd_10}`}>
-            <input className={sass.w90} type="submit" value="ارسال" />
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
 
 export default ServiceEdit;

@@ -2,7 +2,8 @@
 
 // Default host that any server should bind to.  This is generally just
 // 'localhost', for all server types
-const defaultHost = 'localhost';
+// const defaultHost = 'localhost';
+const defaultHost = '0.0.0.0';
 
 // Default ports.  Various modes (development, production) and various server
 // types (browser, server, static) are catered for

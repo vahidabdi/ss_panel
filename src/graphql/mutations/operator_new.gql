@@ -1,0 +1,5 @@
+mutation OperatorNew($name: String!) {
+  operator(name: $name) {
+    id
+  }
+}

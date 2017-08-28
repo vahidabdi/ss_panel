@@ -3,8 +3,10 @@
     id
     name
     description
-    picture
+    original
+    thumb
  		view
+    isFeatured
     type {
       id
       name

@@ -1,0 +1,35 @@
+query GetService($ID: ID!){
+  service(id:$ID){
+    activation
+    activationNumber
+    category {
+      id
+    }
+    description
+    view
+    like
+    help
+    isFeatured
+    name
+    operator {
+      id
+    }
+    thumb
+    price
+    status
+    typeId
+    tags
+  }
+  operators {
+    id
+    name
+  }
+  categories {
+    id
+    name
+  }
+  serviceTypes {
+    id
+    name
+ }
+}

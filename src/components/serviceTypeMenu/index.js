@@ -1,42 +1,47 @@
 import React from 'react';
 import sass from 'src/styles/index.scss';
+import { graphql } from 'react-apollo';
+import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
 
-
-const ServiceTypeMenu = () => (
-  <nav className={sass.nav}>
-    <ul>
-      <li className={sass.nav__item}>
-    همه
-      </li>
-      <li className={`${sass.nav__item} ${sass.dropdown}`}>
-  اپراتور
-        <ul className={sass['dropdown__item-box']}>
-          <Operator x={{ operator: 'ایرانسل' }} />
-          <Operator x={{ operator: 'ایرانسل' }} />
-          <Operator x={{ operator: 'ایرانسل' }} />
-          <Operator x={{ operator: 'ایرانسل' }} />
-          <Operator x={{ operator: 'ایرانسل' }} />
+@graphql(ServiceNewQuery)
+class ServiceTypeMenu extends React.Component {
+  render() {
+    const { data } = this.props;
+    if (data.loading) {
+      return null;
+    }
+    return (
+      <nav className={sass.nav}>
+        <ul>
+          <li className={sass.nav__item}>
+        همه
+          </li>
+          <li className={`${sass.nav__item} ${sass.dropdown}`}>
+      اپراتور
+            <ul className={sass['dropdown__item-box']}>
+              {data.operators.map(st =>
+                <Operator key={st.id} x={st} />,
+              )}
+            </ul>
+          </li>
+          {data.categories.map(st =>
+            <ServiceTypeMenuItem key={st.id} x={st} />,
+          )}
         </ul>
-      </li>
-      <ServiceTypeMenuItem x={{ typeService: 'آموزشی' }} />
-      <ServiceTypeMenuItem x={{ typeService: 'آموزشی' }} />
-      <ServiceTypeMenuItem x={{ typeService: 'آموزشی' }} />
-      <ServiceTypeMenuItem x={{ typeService: 'آموزشی' }} />
-      <ServiceTypeMenuItem x={{ typeService: 'آموزشی' }} />
-      <ServiceTypeMenuItem x={{ typeService: 'آموزشی' }} />
-    </ul>
-  </nav>
-);
+      </nav>
+    );
+  }
+}
 
 export default ServiceTypeMenu;
 
 const ServiceTypeMenuItem = ({ x }) => (
-  <li className={sass.nav__item}>{x.typeService}</li>
+  <li className={sass.nav__item}>{x.name}</li>
 );
 
 
 const Operator = ({ x }) => (
   <li className={sass.dropdown__item}>
-    {x.operator}
+    {x.name}
   </li>
 );

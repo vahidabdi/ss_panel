@@ -3,23 +3,63 @@ width: 100%;
 &__box{
   margin: 25px 0 0;
   border: 1px solid #e1e1e1;
-
-
 }
 &__head{
 background-color: #efefef;
 >th{
   padding: 20px 0;
-
 }
   }
   &__row{
     background-color: #fff;
     border-radius:0 0 10px 10px;
+    text-align: center;
   >td{
     padding: 20px 0;
+  }
+  }
 
+
+&__img{
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  vertical-align: middle;
+  padding: 5px;
+  margin: 5px;
+  >img{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
   }
-  }
+}
+&__name{
+  display: inline-block;
+  vertical-align: middle;
+}
+&__delete{
+flex: 1;
+text-align: center;
+display: inline-block;
+>span{
+  display: inline-block;
+vertical-align: middle;
+margin-right: 4px;
+}
+}
+&__edit{
+flex: 1.5;
+text-align: center;
+display: inline-block;
+>i{
+  display: inline-block;
+vertical-align: text-top;
+}
+>span{
+  display: inline-block;
+vertical-align: middle;
+margin-right: 4px;
+}
+}
 
 }

@@ -1,5 +1,5 @@
-mutation ServiceCreation($name: String!, $description: String!, $TypeId: ID!, $picture: Upload, $help: String, $price: String, $operatorId: ID, $categoryId: ID) {
-  service(name: $name, description: $description, typeId: $TypeId, picture: $picture, help: $help, price: $price, operatorId: $operatorId, categoryId: $categoryId) {
+mutation ServiceCreation($activation: String!,$activationNumber: String, $categoryId: ID, $deactivation: String,$description: String!,$expireAfter: Int,$help: String,$isFeatured: Boolean, $name: String!, $operatorId: ID,$picture: Upload!,$price: String, $status: Boolean, $TypeId: ID!,$tags:[String] ) {
+  service(activation: $activation,activationNumber: $activationNumber, categoryId: $categoryId, deactivation: $deactivation, description: $description, expireAfter:$expireAfter, help: $help, isFeatured: $isFeatured, name: $name, operatorId: $operatorId, picture: $picture,price: $price, status: $status, typeId: $TypeId, tags:$tags ) {
     id
   }
 }

@@ -4,7 +4,7 @@
 
 body {
   color: $color_text;
-  background-color: #987897;
+  background-color: #ddd;
   @extend %body-fa;
   &.menu {
     @include mq_max($sm) {
