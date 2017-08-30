@@ -33,7 +33,7 @@ class Services extends React.Component {
                 </thead>
                 <tbody>
                   {data.latestServices.map(st =>
-                    <ServiceParticulars key={st.id} x={st} />
+                    <ServiceParticulars key={st.id} x={st} />,
                   )}
                 </tbody>
               </table>

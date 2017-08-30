@@ -28,6 +28,7 @@ class UploadHTTPFetchNetworkInterface extends HTTPFetchNetworkInterface {
 
         formData.append('operationName', request.operationName || '');
         formData.append('query', printAST(request.query));
+        console.log("sadasdsadasdsadasd################################3");
         console.log(request.variables);
         request.variables.picture = 'picture';
         console.log(request.variables);

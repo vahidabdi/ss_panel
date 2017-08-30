@@ -1,33 +1,25 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
 import sass from 'src/styles/index.scss';
 import ServiceTypeMenu from 'src/components/serviceTypeMenu';
 import FeatureItem from 'src/components/featureItem';
-import query from 'src/graphql/queries/service_types.gql';
+import { graphql } from 'react-apollo';
 // import config from 'kit/config';
+import guery from 'src/graphql/queries/featuredServices.gql';
 
-@graphql(query)
-class Feature extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+@graphql(guery, { options: props => ({ variables: { ID: props.match.params.type_id } }) })
+class FeatureEdit extends React.Component {
   render() {
-    const { data } = this.props;
-    if (data.loading) {
-      return null;
-    }
+    const { type_id } = this.props.match.params;
     return (
       <div className={`${sass.section} ${sass.services} ${sass['section--sm']}`}>
         <div className={sass.section__wrap}>
           <div className={sass.section__main}>
             <div>
-              <ServiceTypeMenuItem key={data.serviceTypes.id} x={data.serviceTypes} />
+              <ServiceTypeMenu />
             </div>
             <div className={sass.featuer}>
               <div className={sass.feature__box}>
-                <FeatureItem service={{ name: 'hassab' }} />
+                <FeatureItem service={{ name: { type_id } }} />
               </div>
             </div>
           </div>
@@ -37,8 +29,4 @@ class Feature extends React.Component {
   }
 }
 
-export default Feature;
-
-const ServiceTypeMenuItem = ({ x }) => (
-  <li className={sass.nav__item}>{x.name}</li>
-);
+export default FeatureEdit;

@@ -1,0 +1,7 @@
+
+query FeaturedService($TypeId: ID!){
+  featuredServices(typeId:$TypeId){
+    name
+    thumb
+ }
+}

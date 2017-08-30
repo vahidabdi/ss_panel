@@ -1,18 +1,19 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import query from 'src/graphql/queries/getService.gql';
-import serviceMutation from 'src/graphql/mutations/service.gql';
+import { withRouter } from 'react-router';
+import updateServiceMutation from 'src/graphql/mutations/updateService.gql';
 import sass from 'src/styles/index.scss';
 import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
 
-@graphql(serviceMutation)
+@graphql(updateServiceMutation)
 @graphql(query, { options: props => ({ variables: { ID: props.match.params.service_id } }) })
 class ServiceEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      service_id: props.match.params.service_id,
+      id: props.match.params.service_id,
       name: '',
       description: '',
       isFeatured: false,
@@ -21,12 +22,12 @@ class ServiceEdit extends React.Component {
       deactivation: '',
       picture: {},
       help: '',
+      expirate_date: '',
       tags: [],
       price: '',
-      expirate_date: '',
-      category_id: null,
-      operator_id: null,
-      type_id: null,
+      categoryId: '',
+      operatorId: null,
+      typeId: null,
       status: true,
     };
 
@@ -39,11 +40,11 @@ class ServiceEdit extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
-      const { name, description, isFeatured, status, activation, activationNumber, help, price, typeId, tags } = nextProps.data.service;
+      const { name, description, isFeatured, status, activation, activationNumber, deactivation, help, price, typeId, tags, operatorId, categoryId } = nextProps.data.service;
       const newTags = tags.map((v, i) => (
         { id: i, text: v }
       ));
-      this.setState({ name, description, isFeatured, status, activation, activationNumber, help, price, typeId, tags: newTags });
+      this.setState({ name, description, isFeatured, status, activation, activationNumber, deactivation, help, price, typeId, tags: newTags, operatorId, categoryId });
     }
   }
 
@@ -51,7 +52,7 @@ class ServiceEdit extends React.Component {
     e.preventDefault();
     this.props.mutate({
       variables: {
-        service_id: this.state.service_id,
+        id: this.state.id,
         name: this.state.name,
         description: this.state.description,
         isFeatured: this.state.isFeatured,
@@ -61,9 +62,10 @@ class ServiceEdit extends React.Component {
         deactivation: this.state.deactivation,
         tags: this.state.tags.map(i => i.text),
         expirate_date: this.state.expirate_date,
-        TypeId: this.state.type_id,
+        typeId: this.state.typeId,
         picture: this.state.picture,
-        category_id: this.state.category_id,
+        categoryId: this.state.categoryId,
+        operatorId: this.state.operatorId,
         price: this.state.price,
         status: this.state.status,
       },
@@ -185,7 +187,7 @@ class ServiceEdit extends React.Component {
                               id={`operator_${st.id}`}
                               type="radio"
                               name="operator_id"
-                              checked={this.state.operator_id === st.id}
+                              checked={this.state.operatorId === st.id}
                               value={st.id}
                               onChange={this.handleRadio} />
                             <span>{st.name}</span>
@@ -202,7 +204,7 @@ class ServiceEdit extends React.Component {
                               id={`serviceType_${st.id}`}
                               type="radio"
                               name="type_id"
-                              checked={this.state.type_id === st.id}
+                              checked={this.state.typeId === st.id}
                               value={st.id}
                               onChange={this.handleRadio} />
                             <span>{st.name}</span>
@@ -218,9 +220,11 @@ class ServiceEdit extends React.Component {
                         <select
                           className={sass.w90}
                           name="categorie"
+                          value={this.state.category_id}
                           onChange={e => this.setState({ category_id: e.target.value })} >
+                          <option selected> -- انتخاب کنید  -- </option>
                           {data.categories.map(st =>
-                            <option key={`category_${st.id}`} value={st.id}>{st.name}</option>,
+                            <option key={`category_${st.id}`} selected={this.state.categoryId === st.id} value={st.id}>{st.name}</option>,
                           )}
                         </select>
                       </div>
@@ -244,7 +248,7 @@ class ServiceEdit extends React.Component {
                       </h4>
                       <div>
                         <input
-                          className={`${sass.block}  ${sass.w90}`}
+                          className={`${sass.block} ${sass.w90}`}
                           type="text"
                           name="activation"
                           id="activationGet"
@@ -335,11 +339,6 @@ class ServiceEdit extends React.Component {
                           onChange={e => this.setState({ price: e.target.value })} />
                       </div>
                     </div>
-                    <div className={`${sass.item_6} ${sass.pd_10}`}>
-                      <h4 className={sass.form__title}>
-                        <label className={sass.block} htmlFor="txt5">تاریخ انقضا</label>
-                      </h4>
-                    </div>
                   </div>
                   <div className={`${sass.form__submit} ${sass.pd_10}`}>
                     <input
@@ -356,5 +355,4 @@ class ServiceEdit extends React.Component {
     );
   }
 }
-
-export default ServiceEdit;
+export default withRouter(ServiceEdit);

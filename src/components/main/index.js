@@ -47,6 +47,7 @@ import Setting from 'src/components/setting';
 import Service from 'src/components/service';
 import ServiceEdit from 'src/components/serviceEdit';
 import Feature from 'src/components/feature';
+import FeatureEdit from 'src/components/featureEdit';
 import Services from 'src/components/services';
 import Banner from 'src/components/banner';
 
@@ -68,7 +69,7 @@ export default () => (
       <Route exact path="/dashboard/services" component={RequireAuth(Services)} />
       <Route exact path="/dashboard/service" component={RequireAuth(Service)} />
       <Route exact path="/dashboard/service/:service_id" component={RequireAuth(ServiceEdit)} />
-      <Route exact path="/dashboard/Feature" component={RequireAuth(Feature)} />
+      <Route exact path="/dashboard/feature" component={RequireAuth(Feature)} />
       <Route exact path="/dashboard/banner" component={RequireAuth(Banner)} />
     </Switch>
   </div>

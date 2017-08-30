@@ -7,8 +7,8 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
 import query from 'src/graphql/queries/latest_services.gql';
 
-@graphql(ServiceNewQuery)
 @graphql(serviceMutation)
+@graphql(ServiceNewQuery)
 class ServiceNew extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class ServiceNew extends React.Component {
       tags: [],
       price: '',
       expirate_date: '',
-      category_id: null,
+      category_id: '',
       operator_id: null,
       type_id: null,
       status: true,
@@ -52,13 +52,16 @@ class ServiceNew extends React.Component {
         expirate_date: this.state.expirate_date,
         TypeId: this.state.type_id,
         picture: this.state.picture,
-        category_id: this.state.category_id,
+        CategoryId: this.state.category_id,
+        OperatorId: this.state.operator_id,
         price: this.state.price,
         status: this.state.status,
       },
       refetchQueries: [{ query }],
     })
-      .then(this.props.history.push('/dashboard'));
+      .then(({ data }) => {
+        this.props.history.push(`/dashboard/service/${data.service.id}`);
+      });
   }
 
   handleDelete(i) {
@@ -92,7 +95,6 @@ class ServiceNew extends React.Component {
   }
 
   render() {
-    console.log(this.state.picture);
     const { data } = this.props;
     if (data.loading) {
       return null;
@@ -192,9 +194,11 @@ class ServiceNew extends React.Component {
                     <select
                       className={sass.w90}
                       name="categorie"
+                      value={this.state.category_id}
                       onChange={e => this.setState({ category_id: e.target.value })} >
+                      <option selected> -- انتخاب کنید  -- </option>
                       {data.categories.map(st =>
-                        <option key={st.id} value={st.id}>{st.name}</option>,
+                        <option key={`category_${st.id}`} value={st.id}>{st.name}</option>,
                       )}
                     </select>
                   </div>
@@ -238,28 +242,22 @@ class ServiceNew extends React.Component {
                       onChange={e => this.setState({ deactivation: e.target.value })} />
                   </div>
                 </div>
-                {(true) ? (
-                  <div className={`${sass.item_6} ${sass.pd_10}`}>
+                <div className={`${sass.item_6} ${sass.pd_10}`}>
+                  <div>
+                    <h4 className={sass.form__title}>
+                      <label className={sass.block} htmlFor="txt13">شماره فعالسازی</label>
+                    </h4>
                     <div>
-                      <h4 className={sass.form__title}>
-                        <label className={sass.block} htmlFor="txt13">شماره فعالسازی</label>
-                      </h4>
-                      <div>
-                        <input
-                          className={`${sass.block} ${sass.w90}`}
-                          type="text"
-                          name="activation_number"
-                          id="txt13"
-                          onChange={e => this.setState({ activation_number: e.target.value })} />
-                      </div>
+                      <input
+                        className={`${sass.block} ${sass.w90}`}
+                        type="text"
+                        name="activation_number"
+                        id="txt13"
+                        onChange={e => this.setState({ activation_number: e.target.value })} />
                     </div>
+                  </div>
                 </div>
-                ) : (
-                      <h2></h2>
-                    )}
-
               </div>
-
               <div className={sass.flex}>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
                   <h4 className={sass.form__title}>
@@ -271,8 +269,7 @@ class ServiceNew extends React.Component {
                       type="textarea"
                       name="help"
                       id="txt3"
-                      onChange={e => this.setState({ help: e.target.value })}
-                    />
+                      onChange={e => this.setState({ help: e.target.value })} />
                   </div>
                 </div>
               </div>

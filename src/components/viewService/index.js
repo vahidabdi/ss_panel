@@ -13,8 +13,8 @@ const ViewService = () => (
           autoDraw
           autoDrawDuration={3000}
           autoDrawEasing="ease-out"
-          data={[0,2,5,9,5,10,3,5,0,0,1,8,2,9,0],[2,2,5,9,5,10,9,5,0,2,1,10,2,9,0]}
-          gradient={['#42b3f4'],['red']}
+          data={[0, 2, 5, 9, 0, 10, 1, 10, 0, 10, 0, 8, 0, 9, 0]}
+          gradient={['#42b3f4']}
           radius={12.7}
           strokeWidth={1.5}
           strokeLinecap={'butt'} />

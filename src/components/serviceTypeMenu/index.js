@@ -24,7 +24,7 @@ class ServiceTypeMenu extends React.Component {
               )}
             </ul>
           </li>
-          {data.categories.map(st =>
+          {data.serviceTypes.map(st =>
             <ServiceTypeMenuItem key={st.id} x={st} />,
           )}
         </ul>

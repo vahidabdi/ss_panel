@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 import config from 'kit/config';
 import mutation from 'src/graphql/mutations/removeService.gql';
 import query from 'src/graphql/queries/latest_services.gql';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 @graphql(mutation)

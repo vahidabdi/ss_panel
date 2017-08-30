@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo';
 import config from 'kit/config';
 import mutation from 'src/graphql/mutations/removeService.gql';
 import query from 'src/graphql/queries/latest_services.gql';
+import { Link } from 'react-router-dom';
 
 @graphql(mutation)
 class ServiceParticulars extends React.Component {
@@ -33,7 +34,7 @@ class ServiceParticulars extends React.Component {
         <td>زمان انقضا</td>
         <td>
           <button className={sass.table__delete} onClick={this.removeService}><i className={sass['icon-delete']} /><span>حذف</span></button>
-          <div className={sass.table__edit}><i className={sass['icon-edit']} /><span>ویرایش</span> </div>
+          <div className={sass.table__edit}><Link to={`/dashboard/service/${this.props.x.id}`}><i className={sass['icon-edit']} /><span>ویرایش</span></Link></div>
         </td>
 
       </tr>
