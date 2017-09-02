@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import query from 'src/graphql/queries/getService.gql';
+import latestServices from 'src/graphql/queries/latest_services.gql';
 import { withRouter } from 'react-router';
 import updateServiceMutation from 'src/graphql/mutations/updateService.gql';
 import sass from 'src/styles/index.scss';
@@ -8,7 +9,7 @@ import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
 
 @graphql(updateServiceMutation)
-@graphql(query, { options: props => ({ variables: { ID: props.match.params.service_id } }) })
+@graphql(query, { options: props => ({ variables: { id: props.match.params.service_id } }) })
 class ServiceEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -18,14 +19,14 @@ class ServiceEdit extends React.Component {
       description: '',
       isFeatured: false,
       activation: '',
-      activation_number: '',
+      activationNumber: '',
       deactivation: '',
       picture: {},
       help: '',
       expirate_date: '',
       tags: [],
       price: '',
-      categoryId: '',
+      categoryId: null,
       operatorId: null,
       typeId: null,
       status: true,
@@ -40,11 +41,39 @@ class ServiceEdit extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
-      const { name, description, isFeatured, status, activation, activationNumber, deactivation, help, price, typeId, tags, operatorId, categoryId } = nextProps.data.service;
+      const {
+        name,
+        description,
+        isFeatured,
+        status,
+        activation,
+        activationNumber,
+        deactivation,
+        help,
+        price,
+        typeId,
+        tags,
+        operatorId,
+        categoryId,
+      } = nextProps.data.service;
       const newTags = tags.map((v, i) => (
         { id: i, text: v }
       ));
-      this.setState({ name, description, isFeatured, status, activation, activationNumber, deactivation, help, price, typeId, tags: newTags, operatorId, categoryId });
+      this.setState({
+        name,
+        description,
+        isFeatured,
+        status,
+        activation,
+        activationNumber,
+        deactivation,
+        help,
+        price,
+        typeId,
+        tags: newTags,
+        operatorId,
+        categoryId,
+      });
     }
   }
 
@@ -58,7 +87,7 @@ class ServiceEdit extends React.Component {
         isFeatured: this.state.isFeatured,
         help: this.state.help,
         activation: this.state.activation,
-        activation_number: this.state.activation_number,
+        activationNumber: this.state.activationNumber,
         deactivation: this.state.deactivation,
         tags: this.state.tags.map(i => i.text),
         expirate_date: this.state.expirate_date,
@@ -69,9 +98,10 @@ class ServiceEdit extends React.Component {
         price: this.state.price,
         status: this.state.status,
       },
-      refetchQueries: [{ query }],
+      // refetchQueries: [{ query, variables: { id: this.state.id } }],
+      refetchQueries: [{ latestServices }],
     })
-      .then(this.props.history.push('/dashboard'));
+      .then(this.props.history.push('/dashboard/services'));
   }
 
   handleDelete(i) {
@@ -147,7 +177,6 @@ class ServiceEdit extends React.Component {
                           <input
                             type="checkbox"
                             name="isFeatured"
-                            value
                             checked={this.state.isFeatured}
                             id="isFeatureGet"
                             onChange={e => this.setState({ isFeatured: e.target.checked })} />
@@ -186,7 +215,7 @@ class ServiceEdit extends React.Component {
                             <input
                               id={`operator_${st.id}`}
                               type="radio"
-                              name="operator_id"
+                              name="operatorId"
                               checked={this.state.operatorId === st.id}
                               value={st.id}
                               onChange={this.handleRadio} />
@@ -203,7 +232,7 @@ class ServiceEdit extends React.Component {
                             <input
                               id={`serviceType_${st.id}`}
                               type="radio"
-                              name="type_id"
+                              name="typeId"
                               checked={this.state.typeId === st.id}
                               value={st.id}
                               onChange={this.handleRadio} />
@@ -220,11 +249,11 @@ class ServiceEdit extends React.Component {
                         <select
                           className={sass.w90}
                           name="categorie"
-                          value={this.state.category_id}
-                          onChange={e => this.setState({ category_id: e.target.value })} >
-                          <option selected> -- انتخاب کنید  -- </option>
+                          value={this.state.categoryId || ''}
+                          onChange={e => this.setState({ categoryId: e.target.value })} >
+                          <option value=""> -- انتخاب کنید  -- </option>
                           {data.categories.map(st =>
-                            <option key={`category_${st.id}`} selected={this.state.categoryId === st.id} value={st.id}>{st.name}</option>,
+                            <option key={`category_${st.id}`} value={st.id}>{st.name}</option>,
                           )}
                         </select>
                       </div>
@@ -266,32 +295,27 @@ class ServiceEdit extends React.Component {
                           type="text"
                           name="deactivation"
                           id="deactivationGet"
-                          value={this.state.deactivation}
+                          value={this.state.deactivation || ''}
                           onChange={e => this.setState({ deactivation: e.target.value })} />
                       </div>
                     </div>
-                    {(true) ? (
-                      <div className={`${sass.item_6} ${sass.pd_10}`}>
+                    <div className={`${sass.item_6} ${sass.pd_10}`}>
+                      <div>
+                        <h4 className={sass.form__title}>
+                          <label className={sass.block} htmlFor="activationNumGet">شماره فعالسازی</label>
+                        </h4>
                         <div>
-                          <h4 className={sass.form__title}>
-                            <label className={sass.block} htmlFor="activationNumGet">شماره فعالسازی</label>
-                          </h4>
-                          <div>
-                            <input
-                              className={`${sass.block} ${sass.w90}`}
-                              type="text"
-                              name="activation_number"
-                              id="activationNumGet"
-                              value={this.state.activation_number}
-                              onChange={e => this.setState({ activation_number: e.target.value })} />
-                          </div>
+                          <input
+                            className={`${sass.block} ${sass.w90}`}
+                            type="text"
+                            name="activationNumber"
+                            id="activationNumGet"
+                            value={this.state.activationNumber || ''}
+                            onChange={e => this.setState({ activationNumber: e.target.value })} />
                         </div>
                       </div>
-                    ) : (
-                      <h2 />
-                    )}
+                    </div>
                   </div>
-
                   <div className={sass.flex}>
                     <div className={`${sass.item_6} ${sass.pd_10}`}>
                       <h4 className={sass.form__title}>
@@ -303,7 +327,7 @@ class ServiceEdit extends React.Component {
                           type="textarea"
                           name="help"
                           id="helpGet"
-                          value={this.state.help}
+                          value={this.state.help || ''}
                           onChange={e => this.setState({ help: e.target.value })} />
                       </div>
                     </div>
@@ -335,7 +359,7 @@ class ServiceEdit extends React.Component {
                           type="text"
                           name="price"
                           id="txt4"
-                          value={this.state.price}
+                          value={this.state.price || ''}
                           onChange={e => this.setState({ price: e.target.value })} />
                       </div>
                     </div>

@@ -1,13 +1,36 @@
 mutation ServiceCreation(
-  $activation: String!, $activationNumber: String, $CategoryId: ID, $deactivation: String,
-  $description: String!, $expireAfter: Int,$help: String, $isFeatured: Boolean, $name: String!,
-  $OperatorId: ID,$picture: Upload!,$price: String, $status: Boolean, $TypeId: ID!,$tags:[String]
-  ) {
+  $activation: String!,
+  $activationNumber: String,
+  $CategoryId: ID,
+  $deactivation: String,
+  $description: String!,
+  $expireAfter: Int,
+  $help: String,
+  $isFeatured: Boolean,
+  $name: String!,
+  $OperatorId: ID,
+  $picture: Upload,
+  $price: String,
+  $status: Boolean,
+  $TypeId: ID!,
+  $tags:[String]
+) {
   service(
-    activation: $activation, activationNumber: $activationNumber, categoryId: $CategoryId,
-    deactivation: $deactivation, description: $description, expireAfter: $expireAfter,
-    help: $help, isFeatured: $isFeatured, name: $name, operatorId: $OperatorId,
-    picture: $picture,price: $price, status: $status, typeId: $TypeId, tags:$tags
+    activation: $activation,
+    activationNumber: $activationNumber,
+    categoryId: $CategoryId,
+    deactivation: $deactivation,
+    description: $description,
+    expireAfter: $expireAfter,
+    help: $help,
+    isFeatured: $isFeatured,
+    name: $name,
+    operatorId: $OperatorId,
+    picture: $picture,
+    price: $price,
+    status: $status,
+    typeId: $TypeId,
+    tags:$tags
   ) {
     id
   }

@@ -1,5 +1,5 @@
-query GetService($ID: ID!){
-  service(id:$ID){
+query GetService($id: ID!){
+  service(id:$id){
     activation
     activationNumber
     deactivation

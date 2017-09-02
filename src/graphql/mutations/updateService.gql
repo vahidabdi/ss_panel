@@ -1,10 +1,35 @@
-mutation updateService($ID: ID!, $activation: String,$activationNumber: String, $categoryId: ID,
- $deactivation: String,$description: String,$help: String,$isFeatured: Boolean, $name: String,
-  $operatorId: ID,$price: String, $status: Boolean, $TypeId: ID,$tags:[String] ) {
-  updateService(id: $ID, activation: $activation,activationNumber: $activationNumber, categoryId: $categoryId,
-  deactivation: $deactivation, description: $description,
-   help: $help, isFeatured: $isFeatured, name: $name, operatorId: $operatorId,
-   price: $price, status: $status, typeId: $TypeId, tags:$tags ) {
+mutation updateService(
+  $id: ID!,
+  $activation: String,
+  $activationNumber: String,
+  $categoryId: ID,
+  $deactivation: String,
+  $description: String,
+  $help: String,
+  $isFeatured: Boolean,
+  $name: String,
+  $operatorId: ID,
+  $price: String,
+  $status: Boolean,
+  $TypeId: ID,
+  $tags:[String]
+) {
+  updateService(
+    id: $id,
+    activation: $activation,
+    activationNumber: $activationNumber,
+    categoryId: $categoryId,
+    deactivation: $deactivation,
+    description: $description,
+    help: $help,
+    isFeatured: $isFeatured,
+    name: $name,
+    operatorId: $operatorId,
+    price: $price,
+    status: $status,
+    typeId: $TypeId,
+    tags:$tags
+  ) {
     name
   }
 }

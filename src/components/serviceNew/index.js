@@ -17,7 +17,7 @@ class ServiceNew extends React.Component {
       description: '',
       isFeatured: false,
       activation: '',
-      activation_number: '',
+      activationNumber: '',
       deactivation: '',
       picture: {},
       help: '',
@@ -46,7 +46,7 @@ class ServiceNew extends React.Component {
         isFeatured: this.state.isFeatured,
         help: this.state.help,
         activation: this.state.activation,
-        activation_number: this.state.activation_number,
+        activationNumber: this.state.activationNumber,
         deactivation: this.state.deactivation,
         tags: this.state.tags.map(i => i.text),
         expirate_date: this.state.expirate_date,
@@ -196,7 +196,7 @@ class ServiceNew extends React.Component {
                       name="categorie"
                       value={this.state.category_id}
                       onChange={e => this.setState({ category_id: e.target.value })} >
-                      <option selected> -- انتخاب کنید  -- </option>
+                      <option value=""> -- انتخاب کنید  -- </option>
                       {data.categories.map(st =>
                         <option key={`category_${st.id}`} value={st.id}>{st.name}</option>,
                       )}
