@@ -10,9 +10,14 @@ import query from 'src/graphql/queries/service_types.gql';
 class Feature extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      serviceType: 11,
+    };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ serviceType: nextProps.data.serviceTypes[0].id });
+  }
   render() {
     const { data } = this.props;
     if (data.loading) {
@@ -23,11 +28,18 @@ class Feature extends React.Component {
         <div className={sass.section__wrap}>
           <div className={sass.section__main}>
             <div>
-              <ServiceTypeMenuItem key={data.serviceTypes.id} x={data.serviceTypes} />
+              {data.serviceTypes.map(st => (
+                <button
+                  className={`${sass.nav__item}`}
+                  key={st.id}
+                  onClick={e => this.setState({ serviceType: st.id })}>
+                  {st.name}
+                </button>
+              ))}
             </div>
             <div className={sass.featuer}>
               <div className={sass.feature__box}>
-                <FeatureItem service={{ name: 'hassab' }} />
+                <FeatureItem serviceTypeId={this.state.serviceType} />
               </div>
             </div>
           </div>
@@ -38,7 +50,3 @@ class Feature extends React.Component {
 }
 
 export default Feature;
-
-const ServiceTypeMenuItem = ({ x }) => (
-  <li className={sass.nav__item}>{x.name}</li>
-);
