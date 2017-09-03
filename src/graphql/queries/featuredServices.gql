@@ -3,5 +3,6 @@ query FeaturedService($TypeId: ID!){
     id
     name
     thumb
+    view
   }
 }

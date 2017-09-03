@@ -4,10 +4,14 @@
   background-color: #4e99d3;
   color: #fff;
   border-radius: 18px;
-  padding: 5px 30px;
   margin-left: 15px;
   transition: all 0.3s;
   margin-bottom: 10px;
+  button{
+  color: #fff;
+  padding: 5px 30px;
+  @extend %body-fa;
+  }
   &:last-child{
     margin-left: 0;
   }
@@ -17,6 +21,8 @@
 }
 .dropdown{
   position: relative;
+  padding: 5px 30px;
+
   &:hover{
     border-radius: 18px 18px 0 0;
     .dropdown__item-box{

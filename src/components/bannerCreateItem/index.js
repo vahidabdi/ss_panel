@@ -70,7 +70,7 @@ class BannerCreateItem extends React.Component {
                           className={sass.w90}
                           type="text"
                           name="serviceId"
-                          onChange={e => this.setState({ serviceId : e.target.value })} />
+                          onChange={e => this.setState({ serviceId: e.target.value })} />
                       </div>
                     </div>
                   </div>

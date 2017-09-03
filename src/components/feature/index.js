@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import sass from 'src/styles/index.scss';
-import ServiceTypeMenu from 'src/components/serviceTypeMenu';
 import FeatureItem from 'src/components/featureItem';
 import query from 'src/graphql/queries/service_types.gql';
 // import config from 'kit/config';
@@ -11,7 +10,7 @@ class Feature extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      serviceType: 11,
+      serviceType: null,
     };
   }
 
@@ -29,12 +28,13 @@ class Feature extends React.Component {
           <div className={sass.section__main}>
             <div>
               {data.serviceTypes.map(st => (
-                <button
-                  className={`${sass.nav__item}`}
-                  key={st.id}
-                  onClick={e => this.setState({ serviceType: st.id })}>
-                  {st.name}
-                </button>
+                <li className={`${sass.nav__item} ${this.state.serviceType === st.id ? 'activeMenu' : ''}`}>
+                  <button
+                    key={st.id}
+                    onClick={ e => this.setState({ serviceType: st.id })}>
+                    {st.name}
+                  </button>
+                </li>
               ))}
             </div>
             <div className={sass.featuer}>

@@ -21,6 +21,9 @@ body {
 .page-wrap {
   position: relative;
 }
+.nooverflow{
+    overflow: visible!important;
+}
 .section {
   position: relative;
   overflow: hidden;

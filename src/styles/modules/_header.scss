@@ -3,9 +3,9 @@
 // styles for the header module
 
 .header{
+@extend %shadow;  
 padding: 30px 0;
 background-color: #fff;
-box-shadow: 0px 0.5px 25px 0px rgba(0,0,0,1);
 margin-bottom: 35px;
 
   &__main{

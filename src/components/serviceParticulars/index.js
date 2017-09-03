@@ -24,10 +24,12 @@ class ServiceParticulars extends React.Component {
       <tr className={sass.table__row}>
         <td>{this.props.x.id}</td>
         <td>
-          <div className={sass.table__img}>
-            <img src={`${config.graphQLEndpoint}/${this.props.x.thumb}`} alt="describtion" />
-          </div>
-          <div className={sass.table__name}>{this.props.x.name}</div>
+          <Link to={`/dashboard/service/${this.props.x.id}`}>
+            <div className={sass.table__img}>
+              <img src={`${config.graphQLEndpoint}/${this.props.x.thumb}`} alt="describtion" />
+            </div>
+            <div className={sass.table__name}>{this.props.x.name}</div>
+          </Link>
         </td>
         <td>{this.props.x.view}</td>
         <td>زمان تولید</td>
@@ -35,6 +37,12 @@ class ServiceParticulars extends React.Component {
         <td>
           <button className={sass.table__delete} onClick={this.removeService}><i className={sass['icon-delete']} /><span>حذف</span></button>
           <div className={sass.table__edit}><Link to={`/dashboard/service/${this.props.x.id}`}><i className={sass['icon-edit']} /><span>ویرایش</span></Link></div>
+        </td>
+        <td>
+          <input
+            type="checkbox"
+            name="isFeatured"
+            checked={this.props.x.isFeatured} />
         </td>
 
       </tr>

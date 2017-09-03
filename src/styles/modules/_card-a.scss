@@ -14,6 +14,9 @@
 align-items: center;
 display: flex;
 margin-bottom: 5px;
+:nth-child(even){
+  background-color: rgba(143,143,143,0.5);
+}
 &:last-child{
   margin-bottom: 0;
 }

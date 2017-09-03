@@ -59,6 +59,8 @@ function createNetworkInterface({ uri, opts = {} }) {
 
 const networkInterface = createNetworkInterface({
   uri: config.graphQLEndpoint,
+  shouldBatch: true,
+  queryDeduplication: true,
 });
 
 networkInterface.use([{

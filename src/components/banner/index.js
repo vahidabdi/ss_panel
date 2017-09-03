@@ -26,7 +26,6 @@ class Banner extends React.Component {
     if (data.loading) {
       return null;
     }
-
     return (
       <div className={`${sass.section} ${sass.banner} ${sass['section--sm']}`}>
         <div className={sass.section__wrap}>
@@ -36,7 +35,12 @@ class Banner extends React.Component {
                 {data.banners.map(st =>
                   <BannerItem key={st.id} x={st} />,
                 )}
-                <BannerCreateItem onSubmit={this.onSubmit} />
+                {console.log(data.banners.length)}
+                {(data.banners.length < 6) ? (
+                  <BannerCreateItem onSubmit={this.onSubmit} />
+                ) : (
+                  null
+                )}
               </div>
             </div>
           </div>
