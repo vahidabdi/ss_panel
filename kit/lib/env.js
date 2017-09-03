@@ -9,7 +9,7 @@ const defaultHost = '0.0.0.0';
 // types (browser, server, static) are catered for
 const defaultPorts = {
   production: {
-    server: 4000,
+    server: 4011,
   },
   development: {
     browser: 8080,

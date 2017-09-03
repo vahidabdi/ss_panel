@@ -20,7 +20,7 @@ class Config {
 
     // By default, point the GraphQL URI to the server variant of the local
     // ReactQL project
-    this.graphQLEndpoint = 'http://192.168.1.19:4000/';
+    this.graphQLEndpoint = 'http://localhost:4010/';
 
     // Enable body parsing by default.  Leave `koa-bodyparser` opts as default
     this.enableBodyParser = true;

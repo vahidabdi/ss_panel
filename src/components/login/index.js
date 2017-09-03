@@ -29,12 +29,10 @@ class Login extends React.Component {
         this.props.history.push('/dashboard');
       }).catch(error => {
         this.setState({ error: 'login problem' });
-        console.log('there was an error sending the query', error);
       });
   }
 
   renderError() {
-    console.log('errror');
     if (this.state.error) {
       return <div>{this.state.error}</div>;
     }
