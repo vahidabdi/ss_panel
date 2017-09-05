@@ -1,7 +1,6 @@
 import React from 'react';
 import sass from 'src/styles/index.scss';
 import { graphql } from 'react-apollo';
-import config from 'kit/config';
 import mutation from 'src/graphql/mutations/removeService.gql';
 import query from 'src/graphql/queries/latest_services.gql';
 import { Link } from 'react-router-dom';
@@ -26,7 +25,7 @@ class ServiceParticulars extends React.Component {
         <td>
           <Link to={`/dashboard/service/${this.props.x.id}`}>
             <div className={sass.table__img}>
-              <img src={`${config.graphQLEndpoint}/${this.props.x.thumb}`} alt="describtion" />
+              <img src={this.props.x.thumb} alt="describtion" />
             </div>
             <div className={sass.table__name}>{this.props.x.name}</div>
           </Link>

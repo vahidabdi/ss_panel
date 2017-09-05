@@ -3,7 +3,6 @@ import { graphql } from 'react-apollo';
 import query from 'src/graphql/queries/featuredServices.gql';
 import mutation from 'src/graphql/mutations/updateService.gql';
 import sass from 'src/styles/index.scss';
-import config from 'kit/config';
 import { Link } from 'react-router-dom';
 
 @graphql(mutation)
@@ -33,7 +32,7 @@ class featureItem extends React.Component {
         {data.featuredServices.map(fs => (
           <div key={fs.id} className={sass.feature__item}>
             <div className={sass.feature__img}>
-              <img src={`${config.graphQLEndpoint}/${fs.thumb}`} alt={fs.name} />
+              <img src={fs.thumb} alt={fs.name} />
             </div>
             <h2 className={sass.feature__name}>
               {fs.name}

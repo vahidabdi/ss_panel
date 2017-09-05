@@ -1,7 +1,6 @@
 import React from 'react';
 import sass from 'src/styles/index.scss';
 import { graphql } from 'react-apollo';
-import config from 'kit/config';
 import mutation from 'src/graphql/mutations/removeService.gql';
 import query from 'src/graphql/queries/latest_services.gql';
 import { Link } from 'react-router-dom';
@@ -25,7 +24,7 @@ class LatestServicesItem extends React.Component {
     return (
       <li className={sass['card-a__item-box']}>
         <div className={sass['card-a__img']}>
-          <img src={`${config.graphQLEndpoint}/${this.props.x.thumb}`} alt="describtion" />
+          <img src={this.props.x.thumb} alt="describtion" />
         </div>
         <div className={sass['card-a__name']}>{this.props.x.name}</div>
         <div className={sass['card-a__type']}>{this.props.x.type.name}</div>

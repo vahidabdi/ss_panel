@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import sass from 'src/styles/index.scss';
-import config from 'kit/config';
 import mutation from 'src/graphql/mutations/removeBanner.gql';
 import query from 'src/graphql/queries/banners.gql';
 
@@ -22,7 +21,7 @@ class BannerItem extends React.Component {
     return (
       <div className={sass['card-c']}>
         <div className={sass['card-c__img-box']}>
-          <img src={`${config.graphQLEndpoint}/${this.props.x.thumb}`} alt="panel" />
+          <img src={this.props.x.thumb} alt="panel" />
         </div>
         <h2 className={sass['card-c__name']}>
           {this.props.x.id}
