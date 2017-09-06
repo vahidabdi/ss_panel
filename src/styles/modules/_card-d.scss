@@ -5,7 +5,6 @@
   color: #808080;
   &__title{
     color: #808080;
-
   }
   &__itembox{
       display: flex;
@@ -26,7 +25,26 @@
   &__btn{
   }
   &__form{
-    input{
+    .input{
+      width: 10%;
+      padding: 10px;
+      opacity: 1;
+      position: absolute;
+      right: 12px;
+      top: 1px;
+      border: 0 solid #888;
+      border-radius: 15px;
+      transition: all 0.3s;
+      opacity: 0;
+      &:focus{
+      border: 1px solid #888;
+      width: 65%;
+      right: 50px;
+      opacity: 1;
+      }
+
+    }
+    .checkbox{
       width: 10%;
       padding: 10px;
       opacity: 1;

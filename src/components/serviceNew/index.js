@@ -19,7 +19,7 @@ class ServiceNew extends React.Component {
       activation: '',
       activationNumber: '',
       deactivation: '',
-      picture: {},
+      picture: null,
       help: '',
       tags: [],
       price: '',
@@ -28,6 +28,7 @@ class ServiceNew extends React.Component {
       operator_id: null,
       type_id: null,
       status: true,
+      runmode: '',
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -56,6 +57,7 @@ class ServiceNew extends React.Component {
         OperatorId: this.state.operator_id,
         price: this.state.price,
         status: this.state.status,
+        runmode: this.state.runmode,
       },
       refetchQueries: [{ query }],
     })
@@ -186,6 +188,38 @@ class ServiceNew extends React.Component {
                     )}
                   </div>
                 </div>
+                <div className={sass.item_6}>
+                  <h4 className={sass.form__title}>نوع اجرایی</h4>
+                  <div className={sass.pd_10}>
+                    <label htmlFor="runmodeSms">
+                      <input
+                        id="runmodeSms"
+                        type="radio"
+                        name="runmode"
+                        value="sms"
+                        onChange={this.handleRadio} />
+                      <span>SMS</span>
+                    </label>
+                    <label htmlFor="runmodeUssd">
+                      <input
+                        id="runmodeUssd"
+                        type="radio"
+                        name="runmode"
+                        value="ussd"
+                        onChange={this.handleRadio} />
+                      <span>USSD</span>
+                    </label>
+                    <label htmlFor="runmodeTelegram">
+                      <input
+                        id="runmodeTelegram"
+                        type="radio"
+                        name="runmode"
+                        value="telegram"
+                        onChange={this.handleRadio} />
+                      <span>Telegram</span>
+                    </label>
+                  </div>
+                </div>
               </div>
               <div className={sass.flex}>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
@@ -251,9 +285,9 @@ class ServiceNew extends React.Component {
                       <input
                         className={`${sass.block} ${sass.w90}`}
                         type="text"
-                        name="activation_number"
+                        name="activationNumber"
                         id="txt13"
-                        onChange={e => this.setState({ activation_number: e.target.value })} />
+                        onChange={e => this.setState({ activationNumber: e.target.value })} />
                     </div>
                   </div>
                 </div>

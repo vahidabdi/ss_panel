@@ -21,7 +21,7 @@ class ServiceEdit extends React.Component {
       activation: '',
       activationNumber: '',
       deactivation: '',
-      picture: {},
+      picture: null,
       help: '',
       expirate_date: '',
       tags: [],
@@ -30,6 +30,7 @@ class ServiceEdit extends React.Component {
       operatorId: null,
       typeId: null,
       status: true,
+      runmode: '',
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -55,6 +56,7 @@ class ServiceEdit extends React.Component {
         tags,
         operatorId,
         categoryId,
+        runmode,
       } = nextProps.data.service;
       const newTags = tags.map((v, i) => (
         { id: i, text: v }
@@ -73,6 +75,7 @@ class ServiceEdit extends React.Component {
         tags: newTags,
         operatorId,
         categoryId,
+        runmode,
       });
     }
   }
@@ -97,6 +100,7 @@ class ServiceEdit extends React.Component {
         operatorId: this.state.operatorId,
         price: this.state.price,
         status: this.state.status,
+        runmode: this.state.runmode,
       },
       // refetchQueries: [{ query, variables: { id: this.state.id } }],
       refetchQueries: [{ latestServices }],
@@ -239,6 +243,41 @@ class ServiceEdit extends React.Component {
                             <span>{st.name}</span>
                           </label>),
                         )}
+                      </div>
+                    </div>
+                    <div className={sass.item_6}>
+                      <h4 className={sass.form__title}>نوع اجرایی</h4>
+                      <div className={sass.pd_10}>
+                        <label htmlFor="runmodeSms">
+                          <input
+                            id="runmodeSms"
+                            type="radio"
+                            name="runmode"
+                            checked={this.state.runmode === 'sms'}
+                            value="sms"
+                            onChange={this.handleRadio} />
+                          <span>SMS</span>
+                        </label>
+                        <label htmlFor="runmodeUssd">
+                          <input
+                            id="runmodeUssd"
+                            type="radio"
+                            name="runmode"
+                            checked={this.state.runmode === 'ussd'}
+                            value="ussd"
+                            onChange={this.handleRadio} />
+                          <span>USSD</span>
+                        </label>
+                        <label htmlFor="runmodeTelegram">
+                          <input
+                            id="runmodeTelegram"
+                            type="radio"
+                            name="runmode"
+                            checked={this.state.runmode === 'telegram'}
+                            value="telegram"
+                            onChange={this.handleRadio} />
+                          <span>Telegram</span>
+                        </label>
                       </div>
                     </div>
                   </div>

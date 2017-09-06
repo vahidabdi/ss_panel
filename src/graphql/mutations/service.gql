@@ -13,7 +13,8 @@ mutation ServiceCreation(
   $price: String,
   $status: Boolean,
   $TypeId: ID!,
-  $tags:[String]
+  $tags:[String],
+  $runmode: String!
 ) {
   service(
     activation: $activation,
@@ -30,7 +31,8 @@ mutation ServiceCreation(
     price: $price,
     status: $status,
     typeId: $TypeId,
-    tags:$tags
+    tags:$tags,
+    runmode: $runmode
   ) {
     id
   }

@@ -23,12 +23,17 @@ class CreateItemType extends React.Component {
 
   render() {
     return (
-      <form className={sass.form} onSubmit={this.onSubmit}>
-        <input type="text" placeholder="fa name" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+      <form className={sass['card-d__form']} onSubmit={this.onSubmit}>
         <label htmlFor="hasSubCat">
-          <input type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
-        subcat</label>
-        <button className={sass.form__submit} type="submit" />
+        subcat
+          <input className="checkbox" type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
+        </label>
+        <label htmlFor="servicTypeName" className={sass['icon-plus']}>
+          <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
+        </label>
+
+        <button type="submit" />
+
       </form>
     );
   }

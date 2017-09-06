@@ -41,7 +41,7 @@ class ServiceParticulars extends React.Component {
           <input
             type="checkbox"
             name="isFeatured"
-            checked={this.props.x.isFeatured} />
+            defaultChecked={this.props.x.isFeatured} />
         </td>
 
       </tr>

@@ -11,8 +11,10 @@ mutation updateService(
   $operatorId: ID,
   $price: String,
   $status: Boolean,
-  $TypeId: ID,
-  $tags:[String]
+  $typeId: ID,
+  $tags:[String],
+  $runmode:String,
+
 ) {
   updateService(
     id: $id,
@@ -27,8 +29,9 @@ mutation updateService(
     operatorId: $operatorId,
     price: $price,
     status: $status,
-    typeId: $TypeId,
-    tags:$tags
+    typeId: $typeId,
+    tags:$tags,
+    runmode:$runmode,
   ) {
     name
   }

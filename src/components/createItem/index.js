@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 import PropTypes from 'prop-types';
 import sass from 'src/styles/index.scss';
 
@@ -24,7 +24,7 @@ class CreateItem extends React.Component {
     return (
       <form className={sass['card-d__form']} onSubmit={this.onSubmit}>
         <label htmlFor="ic1" className={sass['icon-plus']}>
-          <input type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+          <input className={sass.input} type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
         </label>
         <button type="submit" />
       </form>

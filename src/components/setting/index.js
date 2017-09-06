@@ -27,7 +27,7 @@ class Setting extends React.Component {
     if (data.loading) {
       return null;
     }
-    console.log(data);
+    
     return (
       <div className={`${sass.section} ${sass.setting}`}>
         <div className={sass.section__wrap}>
