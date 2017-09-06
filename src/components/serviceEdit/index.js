@@ -165,7 +165,7 @@ class ServiceEdit extends React.Component {
               <div className={sass.form}>
                 <form onSubmit={this.submitForm}>
                   <div className={sass.pd_10}>
-                    <label className={sass.block} htmlFor="nameGet">نام سرویس</label>
+                    <label className={sass.block} htmlFor="nameGet">نام سرویس  <span className={sass['form--nece']}>*</span></label>
                     <div className={sass.flex}>
                       <div className={sass.item_8}>
                         <input
@@ -201,7 +201,7 @@ class ServiceEdit extends React.Component {
                     </div>
                   </div>
                   <div className={sass.pd_10}>
-                    <label htmlFor="descriptionGet"> توضیحات</label>
+                    <label htmlFor="descriptionGet"> توضیحات  <span className={sass['form--nece']}>*</span></label>
                     <textarea
                       className={`${sass.block} ${sass.pd_10} ${sass.form__textarea}`}
                       type="checkbox"
@@ -212,7 +212,7 @@ class ServiceEdit extends React.Component {
                   </div>
                   <div className={`${sass.flex} ${sass.flex_baseline}`}>
                     <div className={`${sass.item_6} ${sass.pd_10}`}>
-                      <h4 className={sass.form__title}>اپراتور</h4>
+                      <h4 className={sass.form__title}>اپراتور  <span className={sass['form--nece']}>*</span></h4>
                       <div className={sass.pd_10} >
                         {data.operators.map(st => (
                           <label key={`operator_${st.id}`} htmlFor={`operator_${st.id}`}>
@@ -246,7 +246,7 @@ class ServiceEdit extends React.Component {
                       </div>
                     </div>
                     <div className={sass.item_6}>
-                      <h4 className={sass.form__title}>نوع اجرایی</h4>
+                      <h4 className={sass.form__title}>نوع اجرایی  <span className={sass['form--nece']}>*</span></h4>
                       <div className={sass.pd_10}>
                         <label htmlFor="runmodeSms">
                           <input
@@ -312,7 +312,7 @@ class ServiceEdit extends React.Component {
                   <div className={sass.flex}>
                     <div className={`${sass.item_6} ${sass.pd_10}`}>
                       <h4 className={sass.form__title}>
-                        <label className={sass.block} htmlFor="activationGet">کدفعالسازی</label>
+                        <label className={`${sass.block} ${sass['form__label--green']}`} htmlFor="activationGet">کدفعالسازی <span className={sass['form--nece']}>*</span></label>
                       </h4>
                       <div>
                         <input
@@ -326,7 +326,7 @@ class ServiceEdit extends React.Component {
                     </div>
                     <div className={`${sass.item_6} ${sass.pd_10}`}>
                       <h4 className={sass.form__title}>
-                        <label className={sass.block} htmlFor="deactivationGet">کد غیرفعالسازی</label>
+                        <label className={`${sass.block} ${sass['form__label--dng']}`} htmlFor="deactivationGet">کد غیرفعالسازی</label>
                       </h4>
                       <div>
                         <input
@@ -341,7 +341,7 @@ class ServiceEdit extends React.Component {
                     <div className={`${sass.item_6} ${sass.pd_10}`}>
                       <div>
                         <h4 className={sass.form__title}>
-                          <label className={sass.block} htmlFor="activationNumGet">شماره فعالسازی</label>
+                          <label className={`${sass.block} ${sass['form__label--blue']}`} htmlFor="activationNumGet">شماره فعالسازی</label>
                         </h4>
                         <div>
                           <input

@@ -12,6 +12,7 @@ class BannerCreateItem extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      closeModal: true,
       picture: {},
       serviceId: '',
     };
@@ -45,6 +46,7 @@ class BannerCreateItem extends React.Component {
             <i className={sass['icon-plus']} />
             <ReactModal
               isOpen={this.state.showModal}
+              shouldCloseOnOverlayClick
               style={{ overlay: { backgroundColor: 'rgba(0,0,0,.5)' }, content: { backgroundColor: '#fff' } }}
               className="ReactModal__Content"
               contentLabel="Minimal Modal Example">

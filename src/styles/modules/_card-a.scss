@@ -6,6 +6,7 @@
   padding: 10px 20px;
   height: 335px;
   overflow: hidden;
+
   div{
     vertical-align: middle;
     display: inline-block;
@@ -13,10 +14,11 @@
 &__item-box{
 align-items: center;
 display: flex;
-margin-bottom: 5px;
-:nth-child(even){
-  background-color: rgba(143,143,143,0.5);
+padding: 5px;
+&:nth-child(odd){
+    background-color: rgba(143,143,143,0.5);
 }
+
 &:last-child{
   margin-bottom: 0;
 }

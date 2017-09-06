@@ -35,7 +35,6 @@ class Banner extends React.Component {
                 {data.banners.map(st =>
                   <BannerItem key={st.id} x={st} />,
                 )}
-                {console.log(data.banners.length)}
                 {(data.banners.length < 6) ? (
                   <BannerCreateItem onSubmit={this.onSubmit} />
                 ) : (

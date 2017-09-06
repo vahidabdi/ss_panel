@@ -23,11 +23,10 @@ class BannerItem extends React.Component {
         <div className={sass['card-c__img-box']}>
           <img src={this.props.x.thumb} alt="panel" />
         </div>
-        <h2 className={sass['card-c__name']}>
-          {this.props.x.id}
-        </h2>
-        <button className={`${sass['card-c__icon']} ${sass['icon-edit']}`} />
-        <button onClick={this.removeBanner} className={`${sass['card-c__icon']} ${sass['icon-delete']}`} />
+        <div className={sass['card-c__hover']}>
+          <button className={`${sass['card-c__icon']} ${sass['icon-edit']}`} />
+          <button onClick={this.removeBanner} className={`${sass['card-c__icon']} ${sass['icon-delete']}`} />
+        </div>
       </div>
 
     );
