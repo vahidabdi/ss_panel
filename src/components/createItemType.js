@@ -8,7 +8,6 @@ class CreateItemType extends React.Component {
     super(props);
     this.state = {
       name: '',
-      engName: '',
       hasSubCat: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -17,16 +16,15 @@ class CreateItemType extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const { name, engName, hasSubCat } = this.state;
-    this.props.onSubmit(name, engName, hasSubCat);
-    this.setState({ name: '', engName: '', hasSubCat: false });
+    const { name, hasSubCat } = this.state;
+    this.props.onSubmit(name, hasSubCat);
+    this.setState({ name: '', hasSubCat: false });
   }
 
   render() {
     return (
       <form className={sass.form} onSubmit={this.onSubmit}>
         <input type="text" placeholder="fa name" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
-        <input type="text" placeholder="en name" value={this.state.engName} onChange={e => this.setState({ engName: e.target.value })} />
         <label htmlFor="hasSubCat">
           <input type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
         subcat</label>
