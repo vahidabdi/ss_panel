@@ -1,8 +1,7 @@
 {
   banners{
     id
-    thumb
-    original
+    banner1x
     service {
       id
     }

@@ -2,7 +2,7 @@ query FeaturedService($TypeId: ID!){
   featuredServices(typeId:$TypeId){
     id
     name
-    thumb
+    thumb1x
     view
   }
 }
