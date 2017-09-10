@@ -21,7 +21,7 @@ class BannerItem extends React.Component {
     return (
       <div className={sass['card-c']}>
         <div className={sass['card-c__img-box']}>
-          <img src={this.props.x.thumb} alt="panel" />
+          <img src={this.props.x.banner1x} alt="panel" />
         </div>
         <div className={sass['card-c__hover']}>
           <button className={`${sass['card-c__icon']} ${sass['icon-edit']}`} />

@@ -16,7 +16,7 @@ class ServiceParticulars extends React.Component {
 
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.removeService = this.removeService.bind(this);
   }
   handleOpenModal() {
@@ -39,7 +39,7 @@ class ServiceParticulars extends React.Component {
         <td>
           <Link to={`/dashboard/service/${this.props.x.id}`}>
             <div className={sass.table__img}>
-              <img src={this.props.x.thumb} alt="describtion" />
+              <img src={this.props.x.thumb1x} alt="describtion" />
             </div>
             <div className={sass.table__name}>{this.props.x.name}</div>
           </Link>

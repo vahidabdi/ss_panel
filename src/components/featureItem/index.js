@@ -32,7 +32,7 @@ class featureItem extends React.Component {
         {data.featuredServices.map(fs => (
           <div key={fs.id} className={sass.feature__item}>
             <div className={sass.feature__img}>
-              <img src={fs.thumb} alt={fs.name} />
+              <img src={fs.thumb1x} alt={fs.name} />
             </div>
             <h2 className={sass.feature__name}>
               {fs.name}

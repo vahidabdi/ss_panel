@@ -17,7 +17,7 @@ class LatestServicesItem extends React.Component {
 
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this)
+    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.removeService = this.removeService.bind(this);
   }
   handleOpenModal() {
@@ -39,7 +39,7 @@ class LatestServicesItem extends React.Component {
     return (
       <li className={sass['card-a__item-box']}>
         <div className={sass['card-a__img']}>
-          <img src={this.props.x.thumb} alt="describtion" />
+          <img src={this.props.x.thumb1x} alt="describtion" />
         </div>
         <div className={sass['card-a__name']}>{this.props.x.name}</div>
         <div className={sass['card-a__type']}>{this.props.x.type.name}</div>
