@@ -73,3 +73,25 @@ h2,h3,h4,label,select{
 .form_typeid{
 
 }
+.form__ok{
+  width: 50%!important;
+  background-color: #17e8a5!important;
+
+  &:hover{
+      background-color: #00c986!important;
+  }
+}
+.form__no{
+  width: 40%;
+  margin-right: 15px;
+  background-color: #f74e11;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+
+  &:hover{
+      background-color: #dd3700!important;
+  }
+}

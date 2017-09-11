@@ -60,15 +60,17 @@ class LatestServicesItem extends React.Component {
             <form onSubmit={this.removeService}>
               <div className={sass.flex}>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
-                  <h4 className={sass.form__title}>  از حذف این سرویس مطمینی؟</h4>
+                  <h4 className={sass.form__title}> از حذف این سرویس اطمینان دارید؟</h4>
                 </div>
               </div>
               <div className={`${sass.form__submit} ${sass.pd_10}`}>
                 <input
-                  className={sass.w90}
+                  className={sass.form__ok}
                   type="submit"
-                  value="خذفش کن" />
-                <button onClick={this.handleCloseModal}> حذفش نکن!</button>
+                  value=" بلی" />
+                <button
+                  className={sass.form__no}
+                  onClick={this.handleCloseModal}> نخیر، حذفش نکن!</button>
               </div>
             </form>
           </div>
