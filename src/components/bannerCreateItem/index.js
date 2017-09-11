@@ -15,6 +15,7 @@ class BannerCreateItem extends React.Component {
       closeModal: true,
       picture: {},
       serviceId: '',
+      OnOverlayClick: true,
     };
     this.submitForm = this.submitForm.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -46,9 +47,10 @@ class BannerCreateItem extends React.Component {
             <i className={sass['icon-plus']} />
             <ReactModal
               isOpen={this.state.showModal}
-              shouldCloseOnOverlayClick
+              shouldCloseOnOverlayClick={this.state.OnOverlayClick}
               style={{ overlay: { backgroundColor: 'rgba(0,0,0,.5)' }, content: { backgroundColor: '#fff' } }}
               className="ReactModal__Content"
+              onRequestClose={this.handleCloseModal}
               contentLabel="Minimal Modal Example">
               <button onClick={this.handleCloseModal} className={sass['icon-cancel3']} />
               <div className={sass.form}>

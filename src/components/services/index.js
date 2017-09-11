@@ -35,8 +35,22 @@ class Services extends React.Component {
       <div className={`${sass.section} ${sass.services} ${sass.nooverflow} ${sass['section--sm']}`}>
         <div className={sass.section__wrap}>
           <div className={sass.section__main}>
-            <div>
-              <nav className={sass.nav}>
+            <div className={sass.flex}>
+              <div className={`${sass.pageLanding} ${sass.item_4}`}>
+                <div>
+                  <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
+                  <button className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
+                  <button className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
+                  <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
+                  <div className={sass['pageLanding__number-box']}>
+                    <span className={sass['pageLanding__number-item']}>15</span>
+                    <span>از</span>
+                    <span className={sass['pageLanding__number-item']}>24</span>
+                  </div>
+                </div>
+
+              </div>
+              <nav className={`${sass.nav} ${sass.item_8}`}>
                 <ul>
                   <li className={`${sass.nav__item} ${!this.state.typeId && !this.state.operatorId ? 'activeMenu' : ''}`}>
                     <button

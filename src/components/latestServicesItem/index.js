@@ -51,7 +51,7 @@ class LatestServicesItem extends React.Component {
         <div className={sass['card-a__edit']}><Link to={`/dashboard/service/${this.props.x.id}`}><i className={sass['icon-edit']} /><span>ویرایش</span></Link> </div>
         <ReactModal
           isOpen={this.state.showModal}
-          shouldCloseOnOverlayClick
+          onRequestClose={this.handleCloseModal}
           style={{ overlay: { backgroundColor: 'rgba(0,0,0,.5)' }, content: { backgroundColor: '#fff' } }}
           className="ReactModal__Content"
           contentLabel="Minimal Modal Example">

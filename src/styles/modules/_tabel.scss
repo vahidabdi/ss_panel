@@ -80,3 +80,91 @@ margin-right: 4px;
 }
 
 }
+
+.pageLanding{
+$colorp: #aaa;
+  &__box-item{
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    border: 1px solid $colorp;
+    background-color: inherit;
+    transition: all 0.3s;
+    &:hover{
+      background-color: #999999;
+    }
+
+  }
+  &__next{
+    border-left: 0;
+
+    &:after{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%,-50%) rotate(-45deg);
+      border-bottom: 1px solid $colorp;
+      border-right: 1px solid $colorp;
+    }
+  }
+  &__next-d{
+    border-left: 0;
+
+    &:after,
+    &:before{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%,-50%) rotate(-45deg);
+      border-bottom: 1px solid $colorp;
+      border-right: 1px solid $colorp;
+    }
+    &:before{
+      left: 43%;
+    }
+  }
+  &__prev{
+    border-left: 0;
+    &:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%,-50%) rotate(45deg);
+    border-bottom: 1px solid $colorp;
+    border-left: 1px solid $colorp;
+  }
+  }
+  &__prev-d{
+    &:after,
+    &:before{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%,-50%) rotate(45deg);
+      border-bottom: 1px solid $colorp;
+      border-left: 1px solid $colorp;
+    }
+    &:before{
+      left: 43%;
+    }
+  }
+  &__number-box{
+    display: inline-block;
+    padding: 0 20px;
+  }
+  &__number-item{
+    padding: 0 10px;
+  }
+}

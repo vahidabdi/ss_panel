@@ -52,7 +52,7 @@ class ServiceParticulars extends React.Component {
           <div className={sass.table__edit}><Link to={`/dashboard/service/${this.props.x.id}`}><i className={sass['icon-edit']} /><span>ویرایش</span></Link></div>
           <ReactModal
             isOpen={this.state.showModal}
-            shouldCloseOnOverlayClick
+            onRequestClose={this.handleCloseModal}
             style={{ overlay: { backgroundColor: 'rgba(0,0,0,.5)' }, content: { backgroundColor: '#fff' } }}
             className="ReactModal__Content"
             contentLabel="Minimal Modal Example">
