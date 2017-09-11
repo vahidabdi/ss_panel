@@ -155,7 +155,7 @@ class ServiceNew extends React.Component {
               </div>
               <div className={`${sass.flex} ${sass.flex_baseline}`}>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
-                  <h4 className={sass.form__title}>اپراتور  <span className={sass['form--nece']}>*</span></h4>
+                  <h4 className={sass.form__title}>اپراتور </h4>
                   <div className={sass.pd_10} >
                     {data.operators.map(st => (
                       <label key={`operator_${st.id}`} htmlFor={`operator_${st.id}`}>
@@ -172,7 +172,7 @@ class ServiceNew extends React.Component {
                   </div>
                 </div>
                 <div className={sass.item_6}>
-                  <h4 className={sass.form__title}>نوع سرویس</h4>
+                  <h4 className={sass.form__title}>نوع سرویس  <span className={sass['form--nece']}>*</span></h4>
                   <div className={sass.pd_10}>
                     {data.serviceTypes.map(st => (
                       <label key={`serviceType_${st.id}`} htmlFor={`serviceType_${st.id}`}>
@@ -256,7 +256,7 @@ class ServiceNew extends React.Component {
                   </h4>
                   <div>
                     <input
-                      className={`${sass.block}  ${sass.w90}`}
+                      className={`${sass.block}  ${sass.w90} ${sass.form__ltr}`}
                       type="text"
                       name="activation"
                       id="txt1"
@@ -269,7 +269,7 @@ class ServiceNew extends React.Component {
                   </h4>
                   <div>
                     <input
-                      className={`${sass.block} ${sass.w90}`}
+                      className={`${sass.block} ${sass.w90} ${sass.form__ltr}`}
                       type="text"
                       name="deactivation"
                       id="txt2"
@@ -283,7 +283,7 @@ class ServiceNew extends React.Component {
                     </h4>
                     <div>
                       <input
-                        className={`${sass.block} ${sass.w90}`}
+                        className={`${sass.block} ${sass.w90} ${sass.form__ltr}`}
                         type="text"
                         name="activationNumber"
                         id="txt13"

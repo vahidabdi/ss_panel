@@ -32,6 +32,9 @@ h2,h3,h4,label,select{
   font: normal normal 14px/1.7 'IRANSans', 'Tahoma', 'Arial';
   color: #676767;
 }
+&__ltr{
+  direction: ltr;
+}
 &__textarea{
   width: 100%;
   height: 100px;
