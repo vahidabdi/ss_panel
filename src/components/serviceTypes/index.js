@@ -9,7 +9,7 @@ class ServiceTypes extends React.Component {
   render() {
     const { data } = this.props;
     if (data.loading) {
-      return null;
+      return <div className="loader-box"><div className="loader" /></div>;
     }
     const total = data.serviceTypes.reduce((acc, obj) => (obj.count + acc), 0);
     return (

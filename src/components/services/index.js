@@ -64,7 +64,7 @@ class Services extends React.Component {
                 </div>
 
               </div>
-              <nav className={`${sass.nav} ${sass.item_8} ${sass.flex_baseline}`}>
+              <nav className={`${sass.nav} ${sass.item_8}`}>
                 <ul>
                   <li className={`${sass.nav__item} ${!this.state.typeId && !this.state.operatorId ? 'activeMenu' : ''}`}>
                     <button

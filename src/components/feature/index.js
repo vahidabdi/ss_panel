@@ -20,7 +20,7 @@ class Feature extends React.Component {
   render() {
     const { data } = this.props;
     if (data.loading) {
-      return null;
+      return <div className="loader-box"><div className="loader" /></div>;
     }
     return (
       <div className={`${sass.section} ${sass.services} ${sass['section--sm']}`}>

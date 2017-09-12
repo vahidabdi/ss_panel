@@ -25,9 +25,8 @@ class Setting extends React.Component {
   render() {
     const { data } = this.props;
     if (data.loading) {
-      return null;
+      return <div className="loader-box"><div className="loader" /></div>;
     }
-    
     return (
       <div className={`${sass.section} ${sass.setting}`}>
         <div className={sass.section__wrap}>

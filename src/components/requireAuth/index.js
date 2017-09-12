@@ -15,7 +15,7 @@ export default WrappedComponent => {
     }
     render() {
       if (this.props.data.loading) {
-        return null;
+        return <div className="loader-box"><div className="loader" /></div>;
       }
       return (
         <div className={sass['page-wrap']}>

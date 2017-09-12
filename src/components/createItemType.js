@@ -26,7 +26,7 @@ class CreateItemType extends React.Component {
       <form className={sass['card-d__form']} onSubmit={this.onSubmit}>
         <label htmlFor="hasSubCat">
         subcat
-            <input className="checkbox" type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
+          <input className="checkbox" type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
         </label>
         <label htmlFor="servicTypeName" className={sass['icon-plus']}>
           <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />

@@ -8,7 +8,7 @@ class ServiceTypeMenu extends React.Component {
   render() {
     const { data } = this.props;
     if (data.loading) {
-      return null;
+      return <div className="loader-box"><div className="loader" /></div>;
     }
     return (
       <nav className={sass.nav}>

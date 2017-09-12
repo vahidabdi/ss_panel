@@ -24,7 +24,7 @@ class Banner extends React.Component {
   render() {
     const { data } = this.props;
     if (data.loading) {
-      return null;
+      return <div className="loader-box"><div className="loader" /></div>;
     }
     return (
       <div className={`${sass.section} ${sass.banner} ${sass['section--sm']}`}>
