@@ -61,8 +61,9 @@ class ServiceNew extends React.Component {
       },
       refetchQueries: [{ query }],
     })
-      .then(({ data }) => {
-        this.props.history.push(`/dashboard/service/${data.service.id}`);
+      .then(() => {
+        this.props.history.push('/dashboard/service/#');
+        window.scrollTo(0, 0);
       });
   }
 

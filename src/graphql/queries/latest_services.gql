@@ -1,5 +1,5 @@
-query LatestServices($typeId: ID, $operatorId: ID){
-  latestServices(typeId: $typeId, operatorId: $operatorId){
+query LatestServices($typeId: ID, $operatorId: ID, $page: Int){
+  latestServices(typeId: $typeId, operatorId: $operatorId, page: $page){
     id
     name
     description

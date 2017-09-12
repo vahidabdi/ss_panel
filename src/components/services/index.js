@@ -7,24 +7,28 @@ import latestServices from 'src/graphql/queries/latest_services.gql';
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
 
 @graphql(latestServices, { options: props => ({ variables: {
-  typeId: props.typeId, operatorId: props.operatorId } }) })
+  typeId: props.typeId, operatorId: props.operatorId, page: props.page } }) })
 class Services extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
       typeId: null,
       operatorId: null,
     };
   }
+
 
   componentWillUpdate(nextProps, nextState) {
     if (this.state !== nextState) {
       nextProps.data.refetch({
         typeId: nextState.typeId,
         operatorId: nextState.operatorId,
+        page: nextState.page,
       });
     }
   }
+
 
   render() {
     const { data } = this.props;

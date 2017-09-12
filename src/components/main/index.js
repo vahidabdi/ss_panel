@@ -47,7 +47,7 @@ import Setting from 'src/components/setting';
 import Service from 'src/components/service';
 import ServiceEdit from 'src/components/serviceEdit';
 import Feature from 'src/components/feature';
-import FeatureEdit from 'src/components/featureEdit';
+// import FeatureEdit from 'src/components/featureEdit';
 import Services from 'src/components/services';
 import Banner from 'src/components/banner';
 

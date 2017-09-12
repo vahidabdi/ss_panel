@@ -16,7 +16,7 @@ background-color: #efefef;
     text-align: center;
     transition: all 0.3s;
     &:hover{
-      background-color: rgba(142,142,142,0.5);
+      background-color: rgba(142,142,142,0.2);
     }
   >td{
     padding: 20px 0;
@@ -25,7 +25,7 @@ background-color: #efefef;
       display: inline-block;
       width: 100%;
     &:hover{
-      background-color: rgba(130,130,130,0.5)
+      background-color: rgba(130,130,130,0.1)
     }
     }
     &:nth-child(2){
@@ -58,8 +58,9 @@ background-color: #efefef;
 flex: 1;
 text-align: center;
 display: inline-block;
+margin-left: 20px;
 >span{
-  display: inline-block;
+display: inline-block;
 vertical-align: middle;
 margin-right: 4px;
 }

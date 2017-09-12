@@ -28,7 +28,7 @@ class featureItem extends React.Component {
       return null;
     }
     return (
-      <div >
+      <div>
         {data.featuredServices.map(fs => (
           <div key={fs.id} className={sass.feature__item}>
             <div className={sass.feature__img}>
