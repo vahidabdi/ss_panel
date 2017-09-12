@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
-import currentUser from 'src/graphql/queries/current_user.gql';
+import query from 'src/graphql/queries/current_user.gql';
 import sass from 'src/styles/index.scss';
 import Header from 'src/components/header';
 
 export default WrappedComponent => {
-  @graphql(currentUser)
+  @graphql(query)
   class RequireAuth extends Component {
     componentWillUpdate(nextProps) {
       if (!nextProps.data.loading && !nextProps.data.currentUser) {
