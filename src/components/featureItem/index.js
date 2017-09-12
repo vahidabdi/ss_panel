@@ -19,7 +19,7 @@ class featureItem extends React.Component {
         id: serviceId,
         isFeatured: false,
       },
-      refetchQueries: [{ query }],
+      refetchQueries: [{ query, variables: { TypeId: this.props.serviceTypeId } }],
     });
   }
   render() {

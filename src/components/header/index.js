@@ -9,7 +9,10 @@ const Header = () => (
     </nav>
     <div className={sass.header__searchbox} >
       <i className={sass['icon-search']} />
-      <input type="text" name="search" placeholder="جستجو" />
+      <input
+        type="text"
+        name="search"
+        placeholder="جستجو" />
     </div>
     <div className={sass.header__btn} >
       <Link className={sass.btn} to="/dashboard/service">

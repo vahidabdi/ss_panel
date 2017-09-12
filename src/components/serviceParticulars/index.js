@@ -45,8 +45,8 @@ class ServiceParticulars extends React.Component {
           </Link>
         </td>
         <td>{this.props.x.view}</td>
-        <td>زمان تولید</td>
-        <td>زمان انقضا</td>
+        <td>--/--/----</td>
+        <td>--/--/----</td>
         <td>
           <button className={sass.table__delete} onClick={this.handleOpenModal}><i className={sass['icon-delete']} /><span>حذف</span></button>
           <div className={sass.table__edit}><Link to={`/dashboard/service/${this.props.x.id}`}><i className={sass['icon-edit']} /><span>ویرایش</span></Link></div>

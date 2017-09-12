@@ -68,7 +68,7 @@ class Services extends React.Component {
                 <ul>
                   <li className={`${sass.nav__item} ${!this.state.typeId && !this.state.operatorId ? 'activeMenu' : ''}`}>
                     <button
-                      onClick={e => this.setState({ operatorId: null, typeId: null })}>
+                      onClick={e => this.setState({ operatorId: null, typeId: null, page: 1 })}>
                    همه
                     </button>
                   </li>

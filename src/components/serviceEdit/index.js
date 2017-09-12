@@ -102,8 +102,7 @@ class ServiceEdit extends React.Component {
         status: this.state.status,
         runmode: this.state.runmode,
       },
-      // refetchQueries: [{ query, variables: { id: this.state.id } }],
-      refetchQueries: [{ latestServices }],
+      refetchQueries: [{ query: latestServices }],
     })
       .then(this.props.history.push('/dashboard/services'));
   }
