@@ -83,7 +83,13 @@ margin-right: 4px;
 }
 
 .pageLanding{
-$colorp: #aaa;
+  $colorp: #aaa;
+  align-items: baseline;
+
+  &__bottom{
+    text-align: center;
+    margin:50px 0;
+  }
   &__box-item{
     position: relative;
     display: inline-block;

@@ -16,6 +16,9 @@ class Services extends React.Component {
       typeId: null,
       operatorId: null,
     };
+
+    this.nextPage = this.nextPage.bind(this);
+    this.prevPage = this.prevPage.bind(this);
   }
 
 
@@ -29,32 +32,39 @@ class Services extends React.Component {
     }
   }
 
+  nextPage = () => {
+    this.setState({ page: this.state.page + 1 });
+  }
+  prevPage = () => {
+    if (!(this.state.page === 1)) {
+      this.setState({ page: this.state.page - 1 });
+    }
+  }
 
   render() {
     const { data } = this.props;
     if (data.loading) {
-      return null;
+      return <div className="loader-box"><div className="loader" /></div>;
     }
     return (
       <div className={`${sass.section} ${sass.services} ${sass.nooverflow} ${sass['section--sm']}`}>
         <div className={sass.section__wrap}>
           <div className={sass.section__main}>
-            <div className={sass.flex}>
+            <div className={`${sass.flex}  ${sass.flex_baseline}`}>
               <div className={`${sass.pageLanding} ${sass.item_4}`}>
                 <div>
                   <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
-                  <button className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
-                  <button className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
+                  <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
+                  <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
                   <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
                   <div className={sass['pageLanding__number-box']}>
-                    <span className={sass['pageLanding__number-item']}>15</span>
-                    <span>از</span>
-                    <span className={sass['pageLanding__number-item']}>24</span>
+                    <span>صفحه</span>
+                    <span className={sass['pageLanding__number-item']}>{this.state.page}</span>
                   </div>
                 </div>
 
               </div>
-              <nav className={`${sass.nav} ${sass.item_8}`}>
+              <nav className={`${sass.nav} ${sass.item_8} ${sass.flex_baseline}`}>
                 <ul>
                   <li className={`${sass.nav__item} ${!this.state.typeId && !this.state.operatorId ? 'activeMenu' : ''}`}>
                     <button
@@ -68,7 +78,7 @@ class Services extends React.Component {
                       {data.operators.map(st => (
                         <li key={`operator_${st.id}`} className={sass.dropdown__item}>
                           <button
-                            onClick={e => this.setState({ operatorId: st.id, typeId: null })}>
+                            onClick={e => this.setState({ operatorId: st.id, typeId: null, page: 1 })}>
                             {st.name}
                           </button>
                         </li>
@@ -78,7 +88,7 @@ class Services extends React.Component {
                   {data.serviceTypes.map(st => (
                     <li key={`serviceType_${st.id}`} className={`${sass.nav__item} ${this.state.typeId === st.id ? 'activeMenu' : ''}`}>
                       <button
-                        onClick={e => this.setState({ typeId: st.id, operatorId: null })}>
+                        onClick={e => this.setState({ typeId: st.id, operatorId: null, page: 1 })}>
                         {st.name}
                       </button>
                     </li>
@@ -106,6 +116,16 @@ class Services extends React.Component {
                   )}
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div className={sass.pageLanding__bottom}>
+            <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
+            <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
+            <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
+            <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
+            <div className={sass['pageLanding__number-box']}>
+              <span>صفحه</span>
+              <span className={sass['pageLanding__number-item']}>{this.state.page}</span>
             </div>
           </div>
         </div>

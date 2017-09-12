@@ -48,3 +48,29 @@ you can import locally, and they wind up in the resulting bundle */
 .activeMenu{
   background-color: #194262;
 }
+.loader-box{
+  position: relative;
+  top: 0;
+  height: 50vh;
+  width: 70vw;
+  margin: auto;
+  overflow: hidden;
+
+}
+.loader {
+  position: absolute;
+  top:50%;
+  right: 42%;
+  transform: translate(50%,-50%);
+    border: 16px solid #194162; /* Light grey */
+    border-top: 16px solid #4e99d3; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
