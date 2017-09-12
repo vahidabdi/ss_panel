@@ -53,6 +53,9 @@ background-color: #efefef;
 &__name{
   display: inline-block;
   vertical-align: middle;
+  max-width: 55%;
+  max-height: 65px;
+  overflow: hidden;
 }
 &__delete{
 flex: 1;

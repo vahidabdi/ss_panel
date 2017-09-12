@@ -105,6 +105,7 @@ class ServiceEdit extends React.Component {
       refetchQueries: [{ query: latestServices }],
     })
       .then(this.props.history.push('/dashboard/services'));
+    window.scrollTo(0, 0);
   }
 
   handleDelete(i) {
@@ -148,7 +149,7 @@ class ServiceEdit extends React.Component {
       <div className={`${sass.section} ${sass.services} ${sass['section--sm']}`}>
         <div className={sass.section__wrap}>
           <div className={sass.section__main}>
-            <h3 className={sass.section__title}> سرویس مهارت گفتن و شنیدن </h3>
+            <h3 className={sass.section__title}>{service.name}</h3>
             <div className={sass.flex}>
               <div className={`${sass.item_4} ${sass.mr_0}`}>
                 <ServiceStatics count={service.view} title="دفعات بازدید سرویس" icon={sass.icon_eye} />
