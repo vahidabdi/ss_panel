@@ -6,6 +6,7 @@ import serviceMutation from 'src/graphql/mutations/service.gql';
 import { WithContext as ReactTags } from 'react-tag-input';
 import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
 import query from 'src/graphql/queries/latest_services.gql';
+import AlertContainer from 'react-alert';
 
 @graphql(serviceMutation)
 @graphql(ServiceNewQuery)
@@ -29,6 +30,8 @@ class ServiceNew extends React.Component {
       type_id: null,
       status: true,
       runmode: '',
+
+      btn_disable: false,
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -40,6 +43,8 @@ class ServiceNew extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
+    this.setState({ btn_disable: true });
+
     this.props.mutate({
       variables: {
         name: this.state.name,
@@ -61,9 +66,22 @@ class ServiceNew extends React.Component {
       },
       refetchQueries: [{ query }],
     })
-      .then(() => {
-        this.props.history.push('/dashboard/service/#');
-        window.scrollTo(0, 0);
+      .then(({ data }) => {
+        // console.log('got data', data);
+        this.msg.show('سرویس جدید با موفقیت ایجاد شد', {
+          time: 2000,
+          type: 'success',
+          icon: <span className={sass['icon-success']} />,
+        });
+        setTimeout(() => { this.props.history.push('/dashboard/service'); }, 2500);
+      }).catch( error => {
+        // console.log('there was an error sending the query', error);
+        this.setState({ btn_disable: false });
+        this.msg.show('خطا در ساخت سرویس جدید', {
+          time: 2000,
+          type: 'error',
+          icon: <span className={sass['icon-error']} />,
+        });
       });
   }
 
@@ -98,6 +116,13 @@ class ServiceNew extends React.Component {
   }
 
   render() {
+    const alertOptions = {
+      offset: 14,
+      position: 'bottom right',
+      theme: 'dark',
+      time: 1000,
+      transition: 'scale',
+    };
     const { data } = this.props;
     if (data.loading) {
       return <div className="loader-box"><div className="loader" /></div>;
@@ -106,6 +131,9 @@ class ServiceNew extends React.Component {
     return (
       <div>
         <div>
+          <div className="alert">
+            <AlertContainer ref={a => { this.msg = a; return this.msg; }} {...alertOptions} />
+          </div>
           <div className={sass.form}>
             <form onSubmit={this.submitForm}>
               <div className={sass.pd_10}>
@@ -113,6 +141,7 @@ class ServiceNew extends React.Component {
                 <div className={sass.flex}>
                   <div className={sass.item_8}>
                     <input
+                      required
                       className={`${sass.block} ${sass.w90}`}
                       type="text"
                       name="name"
@@ -148,6 +177,7 @@ class ServiceNew extends React.Component {
               <div className={sass.pd_10}>
                 <label htmlFor="f3"> توضیحات  <span className={sass['form--nece']}>*</span></label>
                 <textarea
+                  required
                   className={`${sass.block} ${sass.pd_10} ${sass.form__textarea}`}
                   type="checkbox"
                   name="description"
@@ -178,6 +208,7 @@ class ServiceNew extends React.Component {
                     {data.serviceTypes.map(st => (
                       <label key={`serviceType_${st.id}`} htmlFor={`serviceType_${st.id}`}>
                         <input
+                          required
                           id={`serviceType_${st.id}`}
                           type="radio"
                           name="type_id"
@@ -194,6 +225,7 @@ class ServiceNew extends React.Component {
                   <div className={sass.pd_10}>
                     <label htmlFor="runmodeSms">
                       <input
+                        required
                         id="runmodeSms"
                         type="radio"
                         name="runmode"
@@ -257,6 +289,7 @@ class ServiceNew extends React.Component {
                   </h4>
                   <div>
                     <input
+                      required
                       className={`${sass.block}  ${sass.w90} ${sass.form__ltr}`}
                       type="text"
                       name="activation"
@@ -266,7 +299,7 @@ class ServiceNew extends React.Component {
                 </div>
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
                   <h4 className={sass.form__title}>
-                    <label className={`${sass.block} ${sass['form__label--dng']}`}  htmlFor="txt2">کد غیرفعالسازی</label>
+                    <label className={`${sass.block} ${sass['form__label--dng']}`} htmlFor="txt2">کد غیرفعالسازی</label>
                   </h4>
                   <div>
                     <input
@@ -280,10 +313,18 @@ class ServiceNew extends React.Component {
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
                   <div>
                     <h4 className={sass.form__title}>
-                      <label className={`${sass.block} ${sass['form__label--blue']}`} htmlFor="txt13">شماره فعالسازی</label>
+                      <label className={`${sass.block} ${sass['form__label--blue']}`} htmlFor="txt13">
+                       شماره فعالسازی
+                        {
+                          (this.state.runmode === 'sms') ?
+                            <span className={sass['form--nece']}>*</span>
+                            : ''
+                        }
+                      </label>
                     </h4>
                     <div>
                       <input
+                        required={this.state.runmode === 'sms'}
                         className={`${sass.block} ${sass.w90} ${sass.form__ltr}`}
                         type="text"
                         name="activationNumber"
@@ -355,6 +396,7 @@ class ServiceNew extends React.Component {
               </div>
               <div className={`${sass.form__submit} ${sass.pd_10}`}>
                 <input
+                  disabled={this.state.btn_disable}
                   className={sass.w90}
                   type="submit"
                   value="ارسال" />

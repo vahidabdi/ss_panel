@@ -59,6 +59,26 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-error{
+	font-size: 42px;
+	&:before {
+	  content: "\e90c";
+	  color: #f05228;
+	}
+}
+
+.icon-success{
+	font-size: 42px;
+ &:before {
+   content: "\e90b";
+   color: #6ac259;
+ }
+}
+.icon-heart:after {
+  content: "\e909";
+  color: rgb(230, 86, 58);
+}
+
 .icon_minus:before {
   content: "\e908";
 }

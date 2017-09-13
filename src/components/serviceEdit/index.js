@@ -7,9 +7,12 @@ import updateServiceMutation from 'src/graphql/mutations/updateService.gql';
 import sass from 'src/styles/index.scss';
 import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
+import AlertContainer from 'react-alert';
+
+/* eslint no-unused-vars: ["error", { "args": "none" }] */
 
 @graphql(updateServiceMutation)
-@graphql(query, { options: props => ({ variables: { id: props.match.params.service_id } }) })
+@graphql(query, { options: props => ({ variables: { id: props.match.params.service_id }, fetchPolicy: 'network-only' }) })
 class ServiceEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +34,8 @@ class ServiceEdit extends React.Component {
       typeId: null,
       status: true,
       runmode: '',
+
+      btn_disable: false,
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -82,6 +87,7 @@ class ServiceEdit extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
+    this.setState({ btn_disable: true });
     this.props.mutate({
       variables: {
         id: this.state.id,
@@ -102,10 +108,27 @@ class ServiceEdit extends React.Component {
         status: this.state.status,
         runmode: this.state.runmode,
       },
-      refetchQueries: [{ query: latestServices }],
+      refetchQueries: [
+        { query: latestServices },
+      ],
     })
-      .then(this.props.history.push('/dashboard/services'));
-    window.scrollTo(0, 0);
+      .then(({ data }) => {
+        // console.log('got data', data);
+        this.msg.show('به روزرسانی سرویس با موفقیت انجام شد', {
+          time: 3000,
+          type: 'success',
+          icon: <span className={sass['icon-success']} />,
+        });
+        setTimeout(() => { this.props.history.push('/dashboard/services'); }, 3500);
+      }).catch(error => {
+        // console.log('there was an error sending the query', error);
+        this.setState({ btn_disable: false });
+        this.msg.show('خطا در ارسال ویرایش', {
+          time: 2000,
+          type: 'error',
+          icon: <span className={sass['icon-error']} />,
+        });
+      });
   }
 
   handleDelete(i) {
@@ -139,6 +162,13 @@ class ServiceEdit extends React.Component {
   }
 
   render() {
+    const alertOptions = {
+      offset: 14,
+      position: 'bottom right',
+      theme: 'dark',
+      time: 1000,
+      transition: 'scale',
+    };
     const { data } = this.props;
     if (data.loading) {
       return <div className="loader-box"><div className="loader" /></div>;
@@ -149,7 +179,10 @@ class ServiceEdit extends React.Component {
       <div className={`${sass.section} ${sass.services} ${sass['section--sm']}`}>
         <div className={sass.section__wrap}>
           <div className={sass.section__main}>
-            <h3 className={sass.section__title}>{service.name}</h3>
+            <div className="alert">
+              <AlertContainer ref={a => { this.msg = a; return this.msg; }} {...alertOptions} />
+            </div>
+            <h3 className={sass.section__title}>{this.state.name}</h3>
             <div className={sass.flex}>
               <div className={`${sass.item_4} ${sass.mr_0}`}>
                 <ServiceStatics count={service.view} title="دفعات بازدید سرویس" icon={sass.icon_eye} />
@@ -158,7 +191,7 @@ class ServiceEdit extends React.Component {
                 <ServiceStatics count={12} title=" تعداد دفعات اجرای سرویس " icon={sass.icon_check} />
               </div>
               <div className={sass.item_4}>
-                <ServiceStatics count={service.like} title="تعداد لایک" icon={sass.icon_cancel2} />
+                <ServiceStatics count={service.like} title="تعداد لایک" icon={sass['icon-heart']} />
               </div>
             </div>
             <div>
@@ -169,6 +202,7 @@ class ServiceEdit extends React.Component {
                     <div className={sass.flex}>
                       <div className={sass.item_8}>
                         <input
+                          required
                           className={`${sass.block} ${sass.w90}`}
                           type="text"
                           name="name"
@@ -203,6 +237,7 @@ class ServiceEdit extends React.Component {
                   <div className={sass.pd_10}>
                     <label htmlFor="descriptionGet"> توضیحات  <span className={sass['form--nece']}>*</span></label>
                     <textarea
+                      required
                       className={`${sass.block} ${sass.pd_10} ${sass.form__textarea}`}
                       type="checkbox"
                       name="description"
@@ -234,6 +269,7 @@ class ServiceEdit extends React.Component {
                         {data.serviceTypes.map(st => (
                           <label key={`serviceType_${st.id}`} htmlFor={`serviceType_${st.id}`}>
                             <input
+                              required
                               id={`serviceType_${st.id}`}
                               type="radio"
                               name="typeId"
@@ -250,6 +286,7 @@ class ServiceEdit extends React.Component {
                       <div className={sass.pd_10}>
                         <label htmlFor="runmodeSms">
                           <input
+                            required
                             id="runmodeSms"
                             type="radio"
                             name="runmode"
@@ -316,6 +353,7 @@ class ServiceEdit extends React.Component {
                       </h4>
                       <div>
                         <input
+                          required
                           className={`${sass.block} ${sass.w90} ${sass.form__ltr}`}
                           type="text"
                           name="activation"
@@ -341,10 +379,18 @@ class ServiceEdit extends React.Component {
                     <div className={`${sass.item_6} ${sass.pd_10}`}>
                       <div>
                         <h4 className={sass.form__title}>
-                          <label className={`${sass.block} ${sass['form__label--blue']}`} htmlFor="activationNumGet">شماره فعالسازی</label>
+                          <label className={`${sass.block} ${sass['form__label--blue']}`} htmlFor="activationNumGet">
+                            شماره فعالسازی
+                            {
+                              (this.state.runmode === 'sms') ?
+                                <span className={sass['form--nece']}>*</span>
+                                : ''
+                            }
+                          </label>
                         </h4>
                         <div>
                           <input
+                            required={this.state.runmode === 'sms'}
                             className={`${sass.block} ${sass.w90} ${sass.form__ltr}`}
                             type="text"
                             name="activationNumber"
@@ -405,6 +451,7 @@ class ServiceEdit extends React.Component {
                   </div>
                   <div className={`${sass.form__submit} ${sass.pd_10}`}>
                     <input
+                      disabled={this.state.btn_disable}
                       className={sass.w90}
                       type="submit"
                       value="ارسال" />

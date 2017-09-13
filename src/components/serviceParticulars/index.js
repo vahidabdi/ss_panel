@@ -34,7 +34,7 @@ class ServiceParticulars extends React.Component {
   }
   render() {
     return (
-      <tr className={sass.table__row}>
+      <tr className={`${sass.table__row} ${(this.props.x.isFeatured ? 'feature' : 'noFeature')}`}>
         <td>{this.props.x.id}</td>
         <td>
           <Link to={`/dashboard/service/${this.props.x.id}`}>

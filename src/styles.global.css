@@ -2,6 +2,23 @@
 you can import locally, and they wind up in the resulting bundle */
 @import url('https://fonts.googleapis.com/css?family=Gentium+Basic');
 
+input[type="submit"]:disabled {
+  background: #dddddd;
+  color:#aaa;
+}
+
+.alert{
+  direction: ltr;
+}
+.feature{
+  background-color: #FFEFBF;
+
+}
+.feature:hover{
+  background-color: #FFFAAE;
+
+}
+
 
 .ReactTags__tags{
   width: 100%;

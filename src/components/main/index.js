@@ -54,23 +54,25 @@ import Banner from 'src/components/banner';
 
 // ----------------------
 
-export default () => (
-  <div>
-    <Helmet
-      title="ReactQL application"
-      meta={[{
-        name: 'description',
-        content: 'ReactQL starter kit app',
-      }]} />
-    <Switch>
-      <Route exact path="/" component={Login} />
-      <Route exact path="/dashboard" component={RequireAuth(Dashboard)} />
-      <Route exact path="/dashboard/setting" component={RequireAuth(Setting)} />
-      <Route exact path="/dashboard/services" component={RequireAuth(Services)} />
-      <Route exact path="/dashboard/service" component={RequireAuth(Service)} />
-      <Route exact path="/dashboard/service/:service_id" component={RequireAuth(ServiceEdit)} />
-      <Route exact path="/dashboard/feature" component={RequireAuth(Feature)} />
-      <Route exact path="/dashboard/banner" component={RequireAuth(Banner)} />
-    </Switch>
-  </div>
-);
+export default () => {
+  return (
+    <div>
+      <Helmet
+        title="ReactQL application"
+        meta={[{
+          name: 'description',
+          content: 'ReactQL starter kit app',
+        }]} />
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/dashboard" component={RequireAuth(Dashboard)} />
+        <Route exact path="/dashboard/setting" component={RequireAuth(Setting)} />
+        <Route exact path="/dashboard/services" component={RequireAuth(Services)} />
+        <Route exact path="/dashboard/service" component={RequireAuth(Service)} />
+        <Route exact path="/dashboard/service/:service_id" component={RequireAuth(ServiceEdit)} />
+        <Route exact path="/dashboard/feature" component={RequireAuth(Feature)} />
+        <Route exact path="/dashboard/banner" component={RequireAuth(Banner)} />
+      </Switch>
+    </div>
+  );
+};
