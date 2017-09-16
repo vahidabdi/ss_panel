@@ -17,7 +17,7 @@ class Header extends React.Component {
     return (
       <div className={sass.header__main} >
         <nav className={sass.header__nav}>
-          <AmbiguousExample />
+          <HeaderNav />
         </nav>
         <form onSubmit={this.submitForm} className={sass.header__searchbox}>
           <i className={sass['icon-search']} />
@@ -44,7 +44,7 @@ class Header extends React.Component {
 }
 
 export default Header;
-const AmbiguousExample = () => (
+const HeaderNav = () => (
   <ul>
     <li className={sass.header__nav_item}><Link to="/dashboard" exact activeClassName="active">صفحه اصلی</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/services" exact activeClassName="active">سرویس ها</Link></li>

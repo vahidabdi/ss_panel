@@ -15,7 +15,7 @@ const Dashboard = () => (
           <ViewService />
         </div>
       </div>
-      <div className={sass.section__main}>
+      <div className={`${sass.section__main} ${sass['mr-b']}`}>
         <div className={sass.item_6}>
           <LatestServices />
         </div>
