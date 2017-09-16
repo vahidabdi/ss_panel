@@ -2,5 +2,14 @@ query Search($search: String!){
   search(search: $search ){
     id
     name
+    description
+    original
+    thumb1x
+    view
+    isFeatured
+    type {
+      id
+      name
+    }
   }
 }

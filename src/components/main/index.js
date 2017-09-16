@@ -50,6 +50,7 @@ import Feature from 'src/components/feature';
 // import FeatureEdit from 'src/components/featureEdit';
 import Services from 'src/components/services';
 import Banner from 'src/components/banner';
+import Search from 'src/components/search';
 
 
 // ----------------------
@@ -72,6 +73,7 @@ export default () => {
         <Route exact path="/dashboard/service/:service_id" component={RequireAuth(ServiceEdit)} />
         <Route exact path="/dashboard/feature" component={RequireAuth(Feature)} />
         <Route exact path="/dashboard/banner" component={RequireAuth(Banner)} />
+        <Route exact path="/dashboard/search/:search" component={RequireAuth(Search)} />
       </Switch>
     </div>
   );

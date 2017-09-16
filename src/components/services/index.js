@@ -78,7 +78,7 @@ class Services extends React.Component {
                       {data.operators.map(st => (
                         <li key={`operator_${st.id}`} className={sass.dropdown__item}>
                           <button
-                           onClick={e => this.setState({ operatorId: st.id, typeId: null, page: 1 })}>
+                            onClick={e => this.setState({ operatorId: st.id, typeId: null, page: 1 })}>
                             {st.name}
                           </button>
                         </li>

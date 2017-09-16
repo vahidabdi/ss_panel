@@ -1,18 +1,22 @@
 import React from 'react';
 import sass from 'src/styles/index.scss';
 import { NavLink as Link } from 'react-router-dom';
-import { graphql } from 'react-apollo';
-import query from 'src/graphql/queries/latest_services.gql';
+import { withRouter } from 'react-router';
 
-@graphql(query, { options: props => ({ search: props.search }) })
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       search: '',
     };
+    this.submitForm = this.submitForm.bind(this);
   }
 
+  submitForm(e) {
+    e.preventDefault();
+    console.log(this.state.search);
+    this.props.history.push(`/dashboard/search/${this.state.search}`);
+  }
   render() {
     return (
       <div className={sass.header__main} >
@@ -29,7 +33,7 @@ class Header extends React.Component {
             placeholder="جستجو" />
           <input
             type="submit"
-            value="ارسال"
+            value=""
           />
         </form>
         <div className={sass.header__btn} >
@@ -40,10 +44,10 @@ class Header extends React.Component {
         </div>
       </div>
     );
-}
+  }
 }
 
-export default Header;
+export default withRouter(Header);
 const HeaderNav = () => (
   <ul>
     <li className={sass.header__nav_item}><Link to="/dashboard" exact activeClassName="active">صفحه اصلی</Link></li>
