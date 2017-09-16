@@ -18,6 +18,16 @@ input[type="submit"]:disabled {
   background-color: #FFFAAE;
 
 }
+.error{
+  color:#c90808;
+}
+.remember{
+  input{
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+  }
+}
 
 
 .ReactTags__tags{
