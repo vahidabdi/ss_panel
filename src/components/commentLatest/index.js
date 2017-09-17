@@ -73,9 +73,11 @@ class CommentLastest extends React.Component {
           <div className={sass.table__name}>{this.props.x.user.name}</div>
         </td>
         <td>
-          <div className={sass.table__name}>
-            <button onClick={this.handleOpenModalComment}>{this.props.x.comment}</button>
-          </div>
+          <button className={sass.table__button} onClick={this.handleOpenModalComment}>
+            <div className={sass.table__name}>
+              {this.props.x.comment}
+            </div>
+          </button>
         </td>
         <td>
           <input

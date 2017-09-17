@@ -5,6 +5,7 @@ import FeatureItem from 'src/components/featureItem';
 import query from 'src/graphql/queries/service_types.gql';
 // import config from 'kit/config';
 
+/* eslint no-unused-vars: ["error", { "args": "none" }] */
 @graphql(query)
 class Feature extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Feature extends React.Component {
                 <li className={`${sass.nav__item} ${this.state.serviceType === st.id ? 'activeMenu' : ''}`}>
                   <button
                     key={st.id}
-                    onClick={ e => this.setState({ serviceType: st.id })}>
+                    onClick={e => this.setState({ serviceType: st.id })}>
                     {st.name}
                   </button>
                 </li>

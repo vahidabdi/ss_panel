@@ -4,13 +4,16 @@ import query from 'src/graphql/queries/getService.gql';
 import latestServices from 'src/graphql/queries/latest_services.gql';
 import { withRouter } from 'react-router';
 import updateServiceMutation from 'src/graphql/mutations/updateService.gql';
+import removeService from 'src/graphql/mutations/removeService.gql';
 import sass from 'src/styles/index.scss';
 import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
 import AlertContainer from 'react-alert';
+import ReactModal from 'react-modal';
 
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
-
+@graphql(removeService, { name: 'remove' })
+@graphql(updateServiceMutation, { name: 'update' })
 @graphql(updateServiceMutation)
 @graphql(query, { options: props => ({ variables: { id: props.match.params.service_id }, fetchPolicy: 'network-only' }) })
 class ServiceEdit extends React.Component {
@@ -43,7 +46,11 @@ class ServiceEdit extends React.Component {
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.removeService = this.removeService.bind(this);
   }
+
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
@@ -86,11 +93,26 @@ class ServiceEdit extends React.Component {
       });
     }
   }
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
+  removeService() {
+    this.props.remove({
+      variables: { id: this.state.id },
+      refetchQueries: [{ query: latestServices }],
+    });
+    this.props.history.push('/dashboard/services');
+  }
 
   submitForm(e) {
     e.preventDefault();
     this.setState({ btn_disable: true });
-    this.props.mutate({
+    this.props.update({
       variables: {
         id: this.state.id,
         name: this.state.name,
@@ -469,6 +491,35 @@ class ServiceEdit extends React.Component {
                       value="ارسال" />
                   </div>
                 </form>
+                <button
+                  className={sass.form__no}
+                  onClick={this.handleOpenModal}> حذف سرویس</button>
+                <ReactModal
+                  isOpen={this.state.showModal}
+                  onRequestClose={this.handleCloseModal}
+                  style={{ overlay: { backgroundColor: 'rgba(0,0,0,.5)' }, content: { backgroundColor: '#fff' } }}
+                  className="ReactModal__Content"
+                  contentLabel="Minimal Modal Example">
+                  <button onClick={this.handleCloseModal} className={sass['icon-cancel3']} />
+                  <div className={sass.form}>
+                    <form onSubmit={this.removeService}>
+                      <div className={sass.flex}>
+                        <div className={`${sass.item_6} ${sass.pd_10}`}>
+                          <h4 className={sass.form__title}> از حذف این سرویس اطمینان دارید؟</h4>
+                        </div>
+                      </div>
+                      <div className={`${sass.form__submit} ${sass.pd_10}`}>
+                        <input
+                          className={sass.form__ok}
+                          type="submit"
+                          value=" بلی" />
+                        <button
+                          className={sass.form__no}
+                          onClick={this.handleCloseModal}> نخیر، حذفش نکن!</button>
+                      </div>
+                    </form>
+                  </div>
+                </ReactModal>
               </div>
             </div>
           </div>

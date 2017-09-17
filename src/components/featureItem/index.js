@@ -5,6 +5,7 @@ import mutation from 'src/graphql/mutations/updateService.gql';
 import sass from 'src/styles/index.scss';
 import { Link } from 'react-router-dom';
 
+/* eslint no-unused-vars: ["error", { "args": "none" }] */
 @graphql(mutation)
 @graphql(query, { options: props => ({ variables: { TypeId: props.serviceTypeId } }) })
 class featureItem extends React.Component {
