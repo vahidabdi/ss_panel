@@ -62,6 +62,7 @@ class ServiceEdit extends React.Component {
         operatorId,
         categoryId,
         runmode,
+        picture,
       } = nextProps.data.service;
       const newTags = tags.map((v, i) => (
         { id: i, text: v }
@@ -81,6 +82,7 @@ class ServiceEdit extends React.Component {
         operatorId,
         categoryId,
         runmode,
+        picture,
       });
     }
   }

@@ -14,6 +14,7 @@ mutation updateService(
   $typeId: ID,
   $tags:[String],
   $runmode:String,
+  $picture: Upload,
 
 ) {
   updateService(
@@ -32,6 +33,7 @@ mutation updateService(
     typeId: $typeId,
     tags:$tags,
     runmode:$runmode,
+    picture:$picture,
   ) {
     name
   }
