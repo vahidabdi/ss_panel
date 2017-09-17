@@ -52,6 +52,7 @@ import Services from 'src/components/services';
 import Banner from 'src/components/banner';
 import Search from 'src/components/search';
 import Comments from 'src/components/comments';
+import UserList from 'src/components/userList';
 
 
 // ----------------------
@@ -69,12 +70,13 @@ export default () => {
         <Route exact path="/" component={Login} />
         <Route exact path="/dashboard" component={RequireAuth(Dashboard)} />
         <Route exact path="/dashboard/setting" component={RequireAuth(Setting)} />
-        <Route exact path="/dashboard/services" component={RequireAuth(Services)} />
+        <Route exact path="/dashboard/services/:page?" component={RequireAuth(Services)} />
         <Route exact path="/dashboard/service" component={RequireAuth(Service)} />
         <Route exact path="/dashboard/service/:service_id" component={RequireAuth(ServiceEdit)} />
         <Route exact path="/dashboard/feature" component={RequireAuth(Feature)} />
         <Route exact path="/dashboard/banner" component={RequireAuth(Banner)} />
         <Route exact path="/dashboard/comments" component={RequireAuth(Comments)} />
+        <Route exact path="/dashboard/userList" component={RequireAuth(UserList)} />
         <Route exact path="/dashboard/search/:search" component={RequireAuth(Search)} />
       </Switch>
     </div>

@@ -1,0 +1,7 @@
+{
+  socialUsers {
+    id
+    name
+    phoneNumber
+  }
+}
