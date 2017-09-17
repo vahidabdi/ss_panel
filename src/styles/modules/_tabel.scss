@@ -3,6 +3,9 @@ width: 100%;
 &__box{
   margin: 25px 0 0;
   border: 1px solid #e1e1e1;
+  .comments &{
+    width: 100%;
+  }
 }
 &__head{
 background-color: #efefef;
@@ -31,8 +34,24 @@ background-color: #efefef;
     &:nth-child(2){
     text-align: right;
     max-width: 174px;
+    .comments &{
+      max-width: 125px;
     }
-
+    }
+    &:nth-child(4){
+      div{
+        max-width: 100%;
+      }
+    .comments &{
+      max-height: 105px;
+      max-width: 172px;
+    }
+    }
+    &:last-child(){
+    .comments &{
+      max-width: 25px;
+    }
+    }
   }
   }
 

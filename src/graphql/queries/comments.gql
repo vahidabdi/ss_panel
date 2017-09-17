@@ -1,0 +1,14 @@
+{
+  comments {
+    id
+    approved
+    comment
+    service{
+      thumb1x
+      name
+    }
+    user{
+      name
+    }
+  }
+}

@@ -1,0 +1,11 @@
+mutation updateComment(
+  $approved: Boolean!,
+  $commentId: ID!,
+) {
+  updateComment(
+    approved: $approved,
+    commentId: $commentId,
+  ) {
+    Comment
+  }
+}

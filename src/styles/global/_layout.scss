@@ -84,7 +84,8 @@ body {
 &__main{
     position: relative;
     display: flex;
-    .services &{
+    .services &, .comments &
+    {
       flex-direction: column;
     }
     .banner &{

@@ -317,6 +317,16 @@ class ServiceEdit extends React.Component {
                             onChange={this.handleRadio} />
                           <span>Telegram</span>
                         </label>
+                        <label htmlFor="runmodeApp">
+                          <input
+                            id="runmodeApp"
+                            type="radio"
+                            name="runmode"
+                            checked={this.state.runmode === 'app'}
+                            value="app"
+                            onChange={this.handleRadio} />
+                          <span>APP</span>
+                        </label>
                       </div>
                     </div>
                   </div>
