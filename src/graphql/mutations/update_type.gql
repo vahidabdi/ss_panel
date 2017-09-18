@@ -1,0 +1,15 @@
+mutation serviceType_Update(
+  $type_id: ID!,
+  $name: String!,
+  $hasSubCat: Boolean,
+  $hasOperator: Boolean
+  ) {
+  updateType(
+    type_id: $type_id,
+    name: $name,
+    hasSubCat: $hasSubCat,
+    hasOperator: $hasOperator
+  ) {
+    id
+  }
+}

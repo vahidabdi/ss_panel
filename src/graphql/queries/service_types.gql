@@ -2,6 +2,8 @@
   serviceTypes {
     id
     name
+    hasSubCat
+    hasOperator
     count
   }
 }

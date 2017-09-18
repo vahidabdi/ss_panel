@@ -1,5 +1,13 @@
-mutation serviceType_New($name: String!,$hasSubCat: Boolean ) {
-  serviceType(name: $name, hasSubCat: $hasSubCat) {
+mutation serviceType_New(
+$name: String!,
+$hasSubCat: Boolean,
+$hasOperator: Boolean
+ ) {
+  serviceType(name: $name,
+   hasSubCat: $hasSubCat,
+    hasOperator: $hasOperator
+  ) {
     id
+    
   }
 }

@@ -1,5 +1,5 @@
-mutation OperatorNew($name: String!) {
-  operator(name: $name) {
+mutation OperatorNew($name: String!, $buyCharge: String!, $credit: String!, $internetCharge: String!, $payBill: String! ) {
+  operator(name: $name, buyCharge: $buyCharge, credit: $credit, internetCharge: $internetCharge, payBill: $payBill) {
     id
   }
 }

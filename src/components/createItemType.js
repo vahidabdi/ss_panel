@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import sass from 'src/styles/index.scss';
+import ReactModal from 'react-modal';
 
 
 class CreateItemType extends React.Component {
@@ -9,32 +10,63 @@ class CreateItemType extends React.Component {
     this.state = {
       name: '',
       hasSubCat: false,
+      hasOperator: false,
+      showModal: false,
+      closeModal: true,
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const { name, hasSubCat } = this.state;
-    this.props.onSubmit(name, hasSubCat);
-    this.setState({ name: '', hasSubCat: false });
+    const { name, hasSubCat, hasOperator } = this.state;
+    this.props.onSubmit(name, hasSubCat, hasOperator);
+    this.setState({ name: '', hasSubCat: false, hasOperator: false });
+    this.setState({ showModal: false });
   }
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
 
   render() {
     return (
-      <form className={sass['card-d__form']} onSubmit={this.onSubmit}>
-        <label htmlFor="hasSubCat">
-        subcat
-          <input className="checkbox" type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
-        </label>
-        <label htmlFor="servicTypeName" className={sass['icon-plus']}>
-          <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
-        </label>
+      <div>
+        <button onClick={this.handleOpenModal} className={` ${sass['icon-plus']} ${sass.btn__plus}`} />
+        <ReactModal
+          isOpen={this.state.showModal}
+          onRequestClose={this.handleCloseModal}
+          style={{ overlay: { backgroundColor: 'rgba(0,0,0,.5)' }, content: { backgroundColor: '#fff' } }}
+          className="ReactModal__Content"
+          contentLabel="Minimal Modal Example">
+          <button onClick={this.handleCloseModal} className={sass['icon-cancel3']} />
+          <div className={sass.form}>
+            <form onSubmit={this.onSubmit}>
+              <label htmlFor="hasSubCat">
+              subcat
+                <input className="checkbox" type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
+              </label>
+              <label htmlFor="hasOperator">
+              operator
+                <input className="checkbox" type="checkbox" id="hasOperator" checked={this.state.hasOperator} onChange={e => this.setState({ hasOperator: e.target.checked })} />
+              </label>
+              <label htmlFor="servicTypeName">
+                <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
+              </label>
 
-        <button type="submit" />
+              <button className={sass.btn__plus} type="submit">ارسال</button>
 
-      </form>
+            </form>
+          </div>
+        </ReactModal>
+      </div>
     );
   }
 }

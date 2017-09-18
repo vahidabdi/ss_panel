@@ -1,18 +1,37 @@
 import React from 'react';
+import { graphql } from 'react-apollo';
+import mutation from 'src/graphql/mutations/update_category.gql';
 import sass from 'src/styles/index.scss';
 import ReactModal from 'react-modal';
 
-class SettingItemBox extends React.Component {
+@graphql(mutation)
+class SettingCatogory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
       closeModal: true,
-
+      name: '',
     };
+
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  componentWillMount() {
+    this.state.name = this.props.service_category.name;
+  }
+
+  onSubmit() {
+    this.props.mutate({
+      variables: {
+        categoryId: this.props.service_category.id,
+        name: this.state.name,
+      },
+    });
+  }
+
   handleOpenModal() {
     this.setState({ showModal: true });
   }
@@ -20,10 +39,11 @@ class SettingItemBox extends React.Component {
   handleCloseModal() {
     this.setState({ showModal: false });
   }
+
   render() {
     return (
       <div className={sass['card-d__itembox']}>
-        <h3 className={sass['card-d__itemname']}>{this.props.name}</h3>
+        <h3 className={sass['card-d__itemname']}>{this.props.service_category.name}</h3>
         <button onClick={this.handleOpenModal} className={`${sass['card-d__edit']} ${sass['icon-edit']}`}>ویرایش</button>
         <ReactModal
           isOpen={this.state.showModal}
@@ -34,16 +54,8 @@ class SettingItemBox extends React.Component {
           <button onClick={this.handleCloseModal} className={sass['icon-cancel3']} />
           <div className={sass.form}>
             <form onSubmit={this.onSubmit}>
-              <label htmlFor="hasSubCat">
-              subcat
-                <input className="checkbox" type="checkbox" id="hasSubCat" checked={this.state.hasSubCat} onChange={e => this.setState({ hasSubCat: e.target.checked })} />
-              </label>
-              <label htmlFor="hasOperator">
-              operator
-                <input className="checkbox" type="checkbox" id="hasOperator" checked={this.state.hasOperator} onChange={e => this.setState({ hasOperator: e.target.checked })} />
-              </label>
-              <label htmlFor="servicTypeName">
-                <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
+              <label htmlFor="servicCategoryName">
+                <input id="servicCategoryName" className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
               </label>
 
               <button className={sass.btn__plus} type="submit">ارسال</button>
@@ -56,4 +68,4 @@ class SettingItemBox extends React.Component {
   }
 }
 
-export default SettingItemBox;
+export default SettingCatogory;

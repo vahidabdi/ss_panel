@@ -1,0 +1,18 @@
+mutation UpdateOperator(
+  $name: String!,
+  $buyCharge: String!,
+  $credit: String!,
+  $internetCharge: String!,
+  $payBill: String!
+  $operatorId: ID!
+    ) {
+  updateOperator(name: $name,
+  buyCharge: $buyCharge,
+  credit: $credit,
+  internetCharge: $internetCharge,
+  payBill: $payBill,
+  operatorId: $operatorId
+  ) {
+    id
+  }
+}

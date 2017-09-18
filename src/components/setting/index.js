@@ -3,7 +3,10 @@ import sass from 'src/styles/index.scss';
 import { graphql } from 'react-apollo';
 import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
 // import OperatorNew from 'src/graphql/mutations/operator_new.gql';
-import SettingItemBox from 'src/components/settingItemBox';
+// import SettingItemBox from 'src/components/settingItemBox';
+import SettingCatogory from 'src/components/settings/setting_category';
+import SettingType from 'src/components/settings/setting_type';
+import SettingOperator from 'src/components/settings/setting_operator';
 import CreateOperator from 'src/components/createOperator';
 import CreateServiceCategory from 'src/components/createServiceCategory';
 import CreateServiceType from 'src/components/createServiceType';
@@ -35,7 +38,7 @@ class Setting extends React.Component {
               <div className={sass['card-d']}>
                 <h2 className={sass['card-d__title']}>لیست محتوا</h2>
                 {data.categories.map(cat =>
-                  <SettingItemBox key={`${cat.id}_cat`} x={cat} />,
+                  <SettingCatogory key={`${cat.id}_cat`} service_category={cat} />,
                 )}
                 <div className={sass['card-d__btn']}>
                   <CreateServiceCategory />
@@ -46,7 +49,7 @@ class Setting extends React.Component {
               <div className={sass['card-d']}>
                 <h2 className={sass['card-d__title']}>نوع سرویس</h2>
                 {data.serviceTypes.map(t =>
-                  <SettingItemBox key={`${t.id}_type`} x={t} />,
+                  <SettingType key={`${t.id}_type`} service_type={t} />,
                 )}
                 <div className={sass['card-d__btn']}>
                   <CreateServiceType />
@@ -57,7 +60,7 @@ class Setting extends React.Component {
               <div className={sass['card-d']}>
                 <h2 className={sass['card-d__title']}>اپراتورها</h2>
                 {data.operators.map(op =>
-                  <SettingItemBox key={`${op.id}_op`} x={op} />,
+                  <SettingOperator key={`${op.id}_op`} operator={op} />,
                 )}
                 <div className={sass['card-d__btn']}>
                   <CreateOperator />
