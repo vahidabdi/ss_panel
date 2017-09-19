@@ -1,6 +1,6 @@
 import React from 'react';
 import sass from 'src/styles/index.scss';
-import { Tooltip, Area, AreaChart, linearGradient, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { Tooltip, Area, AreaChart, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const data = [
   { name: 'Page A', 'پیامکی': 1000, pv: 2400, amt: 2400 },
