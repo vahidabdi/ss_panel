@@ -73,10 +73,18 @@ class Services extends React.Component {
                   <li className={`${sass.nav__item} ${sass.dropdown}`}>
               اپراتور
                     <ul className={sass['dropdown__item-box']}>
+                      <li className={sass.dropdown__item}>
+                        <button
+                          onClick={e => this.setState({ operatorId: 1000, typeId: null, page: 1 })}>
+                          همه
+                        </button>
+                      </li>
                       {data.operators.map(st => (
                         <li key={`operator_${st.id}`} className={sass.dropdown__item}>
                           <button
-                            onClick={e => this.setState({ operatorId: st.id, typeId: null, page: 1 })}>
+                            onClick={
+                              e => this.setState({ operatorId: st.id, typeId: null, page: 1 })
+                            }>
                             {st.name}
                           </button>
                         </li>

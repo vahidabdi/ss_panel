@@ -33,8 +33,7 @@ class Header extends React.Component {
             placeholder="جستجو" />
           <input
             type="submit"
-            value=""
-          />
+            value="" />
         </form>
         <div className={sass.header__btn} >
           <Link className={sass.btn} to="/dashboard/service">
@@ -51,7 +50,7 @@ export default withRouter(Header);
 const HeaderNav = () => (
   <ul>
     <li className={sass.header__nav_item}><Link to="/dashboard" exact activeClassName="active">صفحه اصلی</Link></li>
-    <li className={sass.header__nav_item}><Link to="/dashboard/services" exact activeClassName="active">سرویس ها</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/services/1" exact activeClassName="active">سرویس ها</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/banner" exact activeClassName="active">بنرها</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/feature" exact activeClassName="active">فیچر</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/comments/1" exact activeClassName="active">نظرات</Link></li>

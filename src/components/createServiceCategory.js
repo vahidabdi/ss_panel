@@ -52,7 +52,7 @@ class CreateServiceCategory extends React.Component {
             <div className={sass.form}>
               <form onSubmit={this.onSubmit}>
                 <label htmlFor="categoryName">
-                  <input className={sass.input} type="text" id="categoryName" value={this.state.name} placeholder="نام اپراتور" onChange={e => this.setState({ name: e.target.value })} />
+                  <input className={sass.input} type="text" id="categoryName" value={this.state.name} placeholder="نام موضوع" onChange={e => this.setState({ name: e.target.value })} />
                 </label>
                 <button className={sass.btn__plus} type="submit">ارسال</button>
 

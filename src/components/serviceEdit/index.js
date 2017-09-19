@@ -139,11 +139,11 @@ class ServiceEdit extends React.Component {
       .then(({ data }) => {
         // console.log('got data', data);
         this.msg.show('به روزرسانی سرویس با موفقیت انجام شد', {
-          time: 2000,
+          time: 1000,
           type: 'success',
           icon: <span className={sass['icon-success']} />,
         });
-        setTimeout(() => { this.props.history.push('/dashboard/services'); }, 2500);
+        setTimeout(() => { this.props.history.push('/dashboard/services'); }, 1500);
       }).catch(error => {
         // console.log('there was an error sending the query', error);
         this.setState({ btn_disable: false });

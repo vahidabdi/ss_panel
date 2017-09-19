@@ -29,7 +29,9 @@ class Feature extends React.Component {
           <div className={sass.section__main}>
             <div>
               {data.serviceTypes.map(st => (
-                <li className={`${sass.nav__item} ${this.state.serviceType === st.id ? 'activeMenu' : ''}`}>
+                <li
+                  key={`main_${st.id}`}
+                  className={`${sass.nav__item} ${this.state.serviceType === st.id ? 'activeMenu' : ''}`}>
                   <button
                     key={st.id}
                     onClick={e => this.setState({ serviceType: st.id })}>

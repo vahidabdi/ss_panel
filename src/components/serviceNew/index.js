@@ -69,11 +69,11 @@ class ServiceNew extends React.Component {
       .then(({ data }) => {
         // console.log('got data', data);
         this.msg.show('سرویس جدید با موفقیت ایجاد شد', {
-          time: 2000,
+          time: 1000,
           type: 'success',
           icon: <span className={sass['icon-success']} />,
         });
-        setTimeout(() => { this.props.history.push('/dashboard/service'); }, 2500);
+        setTimeout(() => { this.props.history.push('/dashboard/service'); }, 1500);
       }).catch( error => {
         // console.log('there was an error sending the query', error);
         this.setState({ btn_disable: false });
@@ -188,6 +188,16 @@ class ServiceNew extends React.Component {
                 <div className={`${sass.item_6} ${sass.pd_10}`}>
                   <h4 className={sass.form__title}>اپراتور </h4>
                   <div className={sass.pd_10} >
+                    <label htmlFor="operator_1000">
+                      <input
+                        id="operator_1000"
+                        type="radio"
+                        name="operator_id"
+                        checked={this.state.operator_id === '1000'}
+                        value="1000"
+                        onChange={this.handleRadio} />
+                      <span>همه</span>
+                    </label>
                     {data.operators.map(st => (
                       <label key={`operator_${st.id}`} htmlFor={`operator_${st.id}`}>
                         <input
