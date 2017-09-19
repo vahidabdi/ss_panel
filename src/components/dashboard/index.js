@@ -8,10 +8,10 @@ const Dashboard = () => (
   <div className={`${sass.section} ${sass.graph}`}>
     <div className={sass.section__wrap}>
       <div className={sass.section__main}>
-        <div className={sass.item_4}>
+        <div className={sass.item_5}>
           <ServiceTypes />
         </div>
-        <div className={` ${sass.item_8} ${sass['graph-container']}`}>
+        <div className={` ${sass.item_7} ${sass['graph-container']}`}>
           <ViewService />
         </div>
       </div>

@@ -54,8 +54,8 @@ const HeaderNav = () => (
     <li className={sass.header__nav_item}><Link to="/dashboard/services" exact activeClassName="active">سرویس ها</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/banner" exact activeClassName="active">بنرها</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/feature" exact activeClassName="active">فیچر</Link></li>
-    <li className={sass.header__nav_item}><Link to="/dashboard/comments" exact activeClassName="active">نظرات</Link></li>
-    <li className={sass.header__nav_item}><Link to="/dashboard/userList" exact activeClassName="active">کاربران</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/comments/1" exact activeClassName="active">نظرات</Link></li>
+    <li className={sass.header__nav_item}><Link to="/dashboard/userList/1" exact activeClassName="active">کاربران</Link></li>
     <li className={sass.header__nav_item}><Link to="/dashboard/setting" exact activeClassName="active">تنظیمات</Link></li>
   </ul>
 );

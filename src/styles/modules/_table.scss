@@ -134,51 +134,51 @@ margin-right: 4px;
   }
   &__next{
     border-left: 0;
-
-    &:after{
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 10px;
-      height: 10px;
-      transform: translate(-50%,-50%) rotate(-45deg);
-      border-bottom: 1px solid $colorp;
-      border-right: 1px solid $colorp;
-    }
+    //
+    // &:after{
+    //   content: '';
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   width: 10px;
+    //   height: 10px;
+    //   transform: translate(-50%,-50%) rotate(-45deg);
+    //   border-bottom: 1px solid $colorp;
+    //   border-right: 1px solid $colorp;
+    // }
   }
   &__next-d{
     border-left: 0;
-
-    &:after,
-    &:before{
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 10px;
-      height: 10px;
-      transform: translate(-50%,-50%) rotate(-45deg);
-      border-bottom: 1px solid $colorp;
-      border-right: 1px solid $colorp;
-    }
-    &:before{
-      left: 43%;
-    }
+    //
+    // &:after,
+    // &:before{
+    //   content: '';
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   width: 10px;
+    //   height: 10px;
+    //   transform: translate(-50%,-50%) rotate(-45deg);
+    //   border-bottom: 1px solid $colorp;
+    //   border-right: 1px solid $colorp;
+    // }
+    // &:before{
+    //   left: 43%;
+    // }
   }
   &__prev{
-    border-left: 0;
-    &:after{
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    transform: translate(-50%,-50%) rotate(45deg);
-    border-bottom: 1px solid $colorp;
-    border-left: 1px solid $colorp;
-  }
+
+  //   &:after{
+  //   content: '';
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   width: 10px;
+  //   height: 10px;
+  //   transform: translate(-50%,-50%) rotate(45deg);
+  //   border-bottom: 1px solid $colorp;
+  //   border-left: 1px solid $colorp;
+  // }
   }
   &__prev-d{
     &:after,

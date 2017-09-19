@@ -34,7 +34,6 @@ class UserList extends React.Component {
     }
   }
 
-
   render() {
     const { data } = this.props;
     if (data.loading) {
@@ -47,10 +46,8 @@ class UserList extends React.Component {
             <div className={`${sass.flex}  ${sass.flex_baseline}`}>
               <div className={`${sass.pageLanding} ${sass.item_4}`}>
                 <div>
-                  <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
-                  <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
-                  <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
-                  <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
+                  <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`}>بعدی</button>
+                  <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`}>قبلی</button>
                   <div className={sass['pageLanding__number-box']}>
                     <span>صفحه</span>
                     <span className={sass['pageLanding__number-item']}>{this.state.page}</span>
@@ -78,10 +75,8 @@ class UserList extends React.Component {
             </div>
           </div>
           <div className={sass.pageLanding__bottom}>
-            <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
-            <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
-            <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
-            <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
+            <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`}>بعدی</button>
+            <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`}>قبلی</button>
             <div className={sass['pageLanding__number-box']}>
               <span>صفحه</span>
               <span className={sass['pageLanding__number-item']}>{this.state.page}</span>

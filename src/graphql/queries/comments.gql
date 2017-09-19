@@ -1,5 +1,5 @@
-{
-  comments {
+query Comments($page: Int) {
+  comments(page: $page) {
     id
     approved
     comment
