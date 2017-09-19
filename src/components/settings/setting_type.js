@@ -12,6 +12,7 @@ class SettingType extends React.Component {
       showModal: false,
       closeModal: true,
       name: '',
+      nameEng: '',
       hasSubCat: false,
       hasOperator: false,
     };
@@ -22,6 +23,7 @@ class SettingType extends React.Component {
 
   componentWillMount() {
     this.state.name = this.props.service_type.name;
+    this.state.nameEng = this.props.service_type.nameEng;
     this.state.hasSubCat = this.props.service_type.hasSubCat;
     this.state.hasOperator = this.props.service_type.hasOperator;
   }
@@ -31,6 +33,7 @@ class SettingType extends React.Component {
       variables: {
         type_id: this.props.service_type.id,
         name: this.state.name,
+        nameEng: this.state.nameEng,
         hasSubCat: this.state.hasSubCat,
         hasOperator: this.state.hasOperator,
       },
@@ -68,7 +71,12 @@ class SettingType extends React.Component {
                 <input name="hasOperator" className="checkbox" type="checkbox" id="hasOperator" checked={this.state.hasOperator} onChange={e => this.setState({ hasOperator: e.target.checked })} />
               </label>
               <label htmlFor="servicTypeName">
-                <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
+              Farsi Name
+                <input className={sass.input} type="text" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+              </label>
+              <label htmlFor="servicTypeNameEng">
+              English Name
+                <input className={sass.input} type="text" value={this.state.nameEng} onChange={e => this.setState({ nameEng: e.target.value })} />
               </label>
 
               <button className={sass.btn__plus} type="submit">ارسال</button>

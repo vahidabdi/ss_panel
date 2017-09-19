@@ -1,13 +1,16 @@
 mutation serviceType_New(
 $name: String!,
 $hasSubCat: Boolean,
-$hasOperator: Boolean
+$hasOperator: Boolean,
+$nameEng: String!,
  ) {
-  serviceType(name: $name,
-   hasSubCat: $hasSubCat,
-    hasOperator: $hasOperator
+  serviceType(
+  name: $name,
+  hasSubCat: $hasSubCat,
+  hasOperator: $hasOperator,
+  nameEng: $nameEng
   ) {
     id
-    
+
   }
 }

@@ -62,7 +62,7 @@ input[type="submit"]:disabled {
   top: 50%;
   transform: translate(50%,-50%);
   width: 40%;
-  height: 248px;
+  min-height: 248px;
 }
 .ReactModal__button{
   width: 100%;

@@ -9,6 +9,7 @@ class CreateItemType extends React.Component {
     super(props);
     this.state = {
       name: '',
+      nameEng: '',
       hasSubCat: false,
       hasOperator: false,
       showModal: false,
@@ -22,9 +23,9 @@ class CreateItemType extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const { name, hasSubCat, hasOperator } = this.state;
-    this.props.onSubmit(name, hasSubCat, hasOperator);
-    this.setState({ name: '', hasSubCat: false, hasOperator: false });
+    const { name, nameEng, hasSubCat, hasOperator } = this.state;
+    this.props.onSubmit(name, nameEng, hasSubCat, hasOperator);
+    this.setState({ name: '', nameEng: '', hasSubCat: false, hasOperator: false });
     this.setState({ showModal: false });
   }
   handleOpenModal() {
@@ -59,6 +60,9 @@ class CreateItemType extends React.Component {
               </label>
               <label htmlFor="servicTypeName">
                 <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
+              </label>
+              <label htmlFor="servicTypeNameEng">
+                <input className={sass.input} type="text" value={this.state.nameEng} placeholder="nameEnglish" onChange={e => this.setState({ nameEng: e.target.value })} />
               </label>
 
               <button className={sass.btn__plus} type="submit">ارسال</button>

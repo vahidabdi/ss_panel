@@ -1,12 +1,14 @@
 mutation serviceType_Update(
   $type_id: ID!,
   $name: String!,
+  $nameEng: String!,
   $hasSubCat: Boolean,
   $hasOperator: Boolean
   ) {
   updateType(
     type_id: $type_id,
     name: $name,
+    nameEng: $nameEng,
     hasSubCat: $hasSubCat,
     hasOperator: $hasOperator
   ) {

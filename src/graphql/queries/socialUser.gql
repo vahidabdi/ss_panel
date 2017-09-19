@@ -1,5 +1,5 @@
-{
-  socialUsers {
+query SocialUser($page: Int) {
+  socialUsers(page: $page, page_size: 3) {
     id
     name
     phoneNumber

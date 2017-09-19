@@ -9,8 +9,32 @@ import User from 'src/components/userItem';
 // @graphql(query, { options: props => ({ variables: {
 //   typeId: props.typeId, operatorId: props.operatorId, page: props.page } }) })
 
-@graphql(query)
+@graphql(query, { options: props => ({ variables: {
+  page: parseInt(props.match.params.page_id, 10),
+} }) })
 class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { page: null };
+
+    this.nextPage = this.nextPage.bind(this);
+    this.prevPage = this.prevPage.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({ page: parseInt(this.props.match.params.page_id, 10) });
+  }
+
+  nextPage = () => {
+    this.props.history.push(`/dashboard/userList/${this.state.page + 1}`);
+  }
+  prevPage = () => {
+    if (!(this.state.page === 1)) {
+      this.props.history.push(`/dashboard/userList/${this.state.page - 1}`);
+    }
+  }
+
+
   render() {
     const { data } = this.props;
     if (data.loading) {
@@ -22,7 +46,17 @@ class UserList extends React.Component {
           <div className={sass.section__main}>
             <div className={`${sass.flex}  ${sass.flex_baseline}`}>
               <div className={`${sass.pageLanding} ${sass.item_4}`}>
-        page
+                <div>
+                  <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
+                  <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
+                  <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
+                  <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
+                  <div className={sass['pageLanding__number-box']}>
+                    <span>صفحه</span>
+                    <span className={sass['pageLanding__number-item']}>{this.state.page}</span>
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -44,7 +78,14 @@ class UserList extends React.Component {
             </div>
           </div>
           <div className={sass.pageLanding__bottom}>
-          page
+            <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__next-d']}`} />
+            <button onClick={this.nextPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__next}`} />
+            <button onClick={this.prevPage} className={`${sass['pageLanding__box-item']} ${sass.pageLanding__prev}`} />
+            <button className={`${sass['pageLanding__box-item']} ${sass['pageLanding__prev-d']}`} />
+            <div className={sass['pageLanding__number-box']}>
+              <span>صفحه</span>
+              <span className={sass['pageLanding__number-item']}>{this.state.page}</span>
+            </div>
           </div>
         </div>
       </div>

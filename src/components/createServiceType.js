@@ -12,10 +12,11 @@ class CreateServiceType extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(name, hasSubCat, hasOperator) {
+  onSubmit(name, nameEng, hasSubCat, hasOperator) {
     this.props.mutate({
       variables: {
         name,
+        nameEng,
         hasSubCat,
         hasOperator,
       },
