@@ -2,6 +2,8 @@
 you can import locally, and they wind up in the resulting bundle */
 @import url('https://fonts.googleapis.com/css?family=Gentium+Basic');
 
+@import '~react-datepicker/dist/react-datepicker.css';
+
 input[type="submit"]:disabled {
   background: #dddddd;
   color:#aaa;

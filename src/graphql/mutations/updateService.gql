@@ -15,7 +15,7 @@ mutation updateService(
   $tags:[String],
   $runmode:String,
   $picture: Upload,
-
+  $expireAfter: String,
 ) {
   updateService(
     id: $id,
@@ -34,6 +34,7 @@ mutation updateService(
     tags:$tags,
     runmode:$runmode,
     picture:$picture,
+    expireAfter: $expireAfter,
   ) {
     name
   }

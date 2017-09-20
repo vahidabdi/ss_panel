@@ -10,7 +10,10 @@ import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
 import AlertContainer from 'react-alert';
 import ReactModal from 'react-modal';
-import { DatePicker } from 'react-persian-datepicker';
+
+import DatePicker from 'react-datepicker';
+// import moment from 'moment-jalaali';
+
 
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
 @graphql(removeService, { name: 'remove' })
@@ -32,6 +35,7 @@ class ServiceEdit extends React.Component {
       help: '',
       tags: [],
       price: '',
+      date: null,
       expireAfter: '',
       categoryId: null,
       operatorId: null,
@@ -50,6 +54,7 @@ class ServiceEdit extends React.Component {
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.removeService = this.removeService.bind(this);
+    this.handleDate = this.handleDate.bind(this);
   }
 
 
@@ -100,6 +105,13 @@ class ServiceEdit extends React.Component {
     this.setState({ showModal: true });
   }
 
+  handleDate(date) {
+    this.setState({
+      date,
+      expireAfter: date.format('YYYY-MM-DD'),
+    });
+  }
+
   handleCloseModal() {
     this.setState({ showModal: false });
   }
@@ -109,7 +121,7 @@ class ServiceEdit extends React.Component {
       variables: { id: this.state.id },
       refetchQueries: [{ query: latestServices }],
     });
-    this.props.history.push('/dashboard/services');
+    this.props.history.push('/dashboard/services/1');
   }
 
   submitForm(e) {
@@ -147,7 +159,7 @@ class ServiceEdit extends React.Component {
           type: 'success',
           icon: <span className={sass['icon-success']} />,
         });
-        setTimeout(() => { this.props.history.push('/dashboard/services'); }, 1500);
+        setTimeout(() => { this.props.history.push('/dashboard/services/1'); }, 1500);
       }).catch(error => {
         // console.log('there was an error sending the query', error);
         this.setState({ btn_disable: false });
@@ -493,11 +505,9 @@ class ServiceEdit extends React.Component {
                     </h4>
                     <div>
                       <div>
-                        {/* Date Picker Component */}
                         <DatePicker
-                          name="expirate_date"
-                          id="txt5"
-                          onChange={value => this.setState({ expireAfter: value.format('YYYY-MM-DD') })} />
+                          selected={this.state.date}
+                          onChange={this.handleDate} />
                       </div>
                     </div>
                   </div>

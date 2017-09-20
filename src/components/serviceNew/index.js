@@ -7,7 +7,10 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
 import query from 'src/graphql/queries/latest_services.gql';
 import AlertContainer from 'react-alert';
-import { DatePicker } from 'react-persian-datepicker';
+
+import DatePicker from 'react-datepicker';
+// import moment from 'moment-jalaali';
+
 
 @graphql(serviceMutation)
 @graphql(ServiceNewQuery)
@@ -25,6 +28,7 @@ class ServiceNew extends React.Component {
       help: '',
       tags: [],
       price: '',
+      date: null,
       expireAfter: '',
       category_id: '',
       operator_id: null,
@@ -40,6 +44,7 @@ class ServiceNew extends React.Component {
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
+    this.handleDate = this.handleDate.bind(this);
   }
 
   submitForm(e) {
@@ -84,6 +89,13 @@ class ServiceNew extends React.Component {
           icon: <span className={sass['icon-error']} />,
         });
       });
+  }
+
+  handleDate(date) {
+    this.setState({
+      date,
+      expireAfter: date.format('YYYY-MM-DD'),
+    });
   }
 
   handleDelete(i) {
@@ -405,11 +417,9 @@ class ServiceNew extends React.Component {
                   </h4>
                   <div>
                     <div>
-                      {/* Date Picker Component */}
                       <DatePicker
-                        name="expirate_date"
-                        id="txt5"
-                        onChange={value => this.setState({ expireAfter: value.format('YYYY-MM-DD') })} />
+                        selected={this.state.date}
+                        onChange={this.handleDate} />
                     </div>
                   </div>
                 </div>
