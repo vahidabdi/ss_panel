@@ -1,5 +1,13 @@
-query LatestServices($typeId: ID, $operatorId: ID, $page: Int){
-  latestServices(typeId: $typeId, operatorId: $operatorId, page: $page){
+query LatestServices(
+ $typeId: ID,
+ $operatorId: ID,
+ $page: Int,
+ ){
+ latestServices(
+ typeId: $typeId,
+ operatorId: $operatorId,
+ page: $page,
+  ){
     id
     name
     description
@@ -7,6 +15,7 @@ query LatestServices($typeId: ID, $operatorId: ID, $page: Int){
     thumb1x
  		view
     isFeatured
+  
     type {
       id
       name

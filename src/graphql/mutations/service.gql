@@ -4,7 +4,7 @@ mutation ServiceCreation(
   $CategoryId: ID,
   $deactivation: String,
   $description: String!,
-  $expireAfter: Int,
+  $expireAfter: String,
   $help: String,
   $isFeatured: Boolean,
   $name: String!,

@@ -7,6 +7,7 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import ServiceNewQuery from 'src/graphql/queries/service_new.gql';
 import query from 'src/graphql/queries/latest_services.gql';
 import AlertContainer from 'react-alert';
+import { DatePicker } from 'react-persian-datepicker';
 
 @graphql(serviceMutation)
 @graphql(ServiceNewQuery)
@@ -24,7 +25,7 @@ class ServiceNew extends React.Component {
       help: '',
       tags: [],
       price: '',
-      expirate_date: '',
+      expireAfter: '',
       category_id: '',
       operator_id: null,
       type_id: null,
@@ -55,7 +56,7 @@ class ServiceNew extends React.Component {
         activationNumber: this.state.activationNumber,
         deactivation: this.state.deactivation,
         tags: this.state.tags.map(i => i.text),
-        expirate_date: this.state.expirate_date,
+        expireAfter: this.state.expireAfter,
         TypeId: this.state.type_id,
         picture: this.state.picture,
         CategoryId: this.state.category_id,
@@ -403,13 +404,13 @@ class ServiceNew extends React.Component {
                     <label className={sass.block} htmlFor="txt5">تاریخ انقضا</label>
                   </h4>
                   <div>
-                    <input
-                      className={`${sass.block} ${sass.w90}`}
-                      type="text"
-                      name="expirate_date"
-                      id="txt5"
-                      onChange={e => this.setState({ expirate_date: e.target.value })}
-                    />
+                    <div>
+                      {/* Date Picker Component */}
+                      <DatePicker
+                        name="expirate_date"
+                        id="txt5"
+                        onChange={value => this.setState({ expireAfter: value.format('YYYY-MM-DD') })} />
+                    </div>
                   </div>
                 </div>
               </div>

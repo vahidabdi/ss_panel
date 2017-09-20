@@ -10,6 +10,7 @@ import ServiceStatics from 'src/components/serviceStatics';
 import { WithContext as ReactTags } from 'react-tag-input';
 import AlertContainer from 'react-alert';
 import ReactModal from 'react-modal';
+import { DatePicker } from 'react-persian-datepicker';
 
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
 @graphql(removeService, { name: 'remove' })
@@ -29,9 +30,9 @@ class ServiceEdit extends React.Component {
       deactivation: '',
       picture: null,
       help: '',
-      expirate_date: '',
       tags: [],
       price: '',
+      expireAfter: '',
       categoryId: null,
       operatorId: null,
       typeId: null,
@@ -70,6 +71,7 @@ class ServiceEdit extends React.Component {
         categoryId,
         runmode,
         picture,
+        expireAfter,
       } = nextProps.data.service;
       const newTags = tags.map((v, i) => (
         { id: i, text: v }
@@ -90,6 +92,7 @@ class ServiceEdit extends React.Component {
         categoryId,
         runmode,
         picture,
+        expireAfter,
       });
     }
   }
@@ -131,6 +134,7 @@ class ServiceEdit extends React.Component {
         price: this.state.price,
         status: this.state.status,
         runmode: this.state.runmode,
+        expireAfter: this.state.expireAfter,
       },
       refetchQueries: [
         { query: latestServices },
@@ -480,6 +484,20 @@ class ServiceEdit extends React.Component {
                           id="txt4"
                           value={this.state.price || ''}
                           onChange={e => this.setState({ price: e.target.value })} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`${sass.item_6} ${sass.pd_10}`}>
+                    <h4 className={sass.form__title}>
+                      <label className={sass.block} htmlFor="txt5">تاریخ انقضا {this.state.expireAfter}</label>
+                    </h4>
+                    <div>
+                      <div>
+                        {/* Date Picker Component */}
+                        <DatePicker
+                          name="expirate_date"
+                          id="txt5"
+                          onChange={value => this.setState({ expireAfter: value.format('YYYY-MM-DD') })} />
                       </div>
                     </div>
                   </div>

@@ -7,12 +7,15 @@ import latestServices from 'src/graphql/queries/latest_services.gql';
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
 
 @graphql(latestServices, { options: props => ({ variables: {
-  typeId: props.typeId, operatorId: props.operatorId, page: props.page } }) })
+  typeId: props.typeId,
+  operatorId: props.operatorId,
+  page: parseInt(props.match.params.page_id, 10),
+} }) })
 class Services extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 1,
+      page: null,
       typeId: null,
       operatorId: null,
     };
@@ -21,7 +24,9 @@ class Services extends React.Component {
     this.prevPage = this.prevPage.bind(this);
   }
 
-
+  componentWillMount() {
+    this.setState({ page: parseInt(this.props.match.params.page_id, 10) });
+  }
   componentWillUpdate(nextProps, nextState) {
     if (this.state !== nextState) {
       nextProps.data.refetch({
@@ -33,11 +38,11 @@ class Services extends React.Component {
   }
 
   nextPage = () => {
-    this.setState({ page: this.state.page + 1 });
+    this.props.history.push(`/dashboard/services/${this.state.page + 1}`);
   }
   prevPage = () => {
     if (!(this.state.page === 1)) {
-      this.setState({ page: this.state.page - 1 });
+      this.props.history.push(`/dashboard/services/${this.state.page - 1}`);
     }
   }
 

@@ -33,7 +33,7 @@ class SettingOperator extends React.Component {
   onSubmit() {
     this.props.mutate({
       variables: {
-        operatorId: this.props.operator.id,
+        operatorId: this.props.operators.id,
         name: this.state.name,
         buyCharge: this.state.buyCharge,
         credit: this.state.credit,
@@ -70,7 +70,7 @@ class SettingOperator extends React.Component {
                 <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
               </label>
               <label htmlFor="buyCharge">
-                <input className={`${sass.input} ${sass.ltr}`} type="text" id="operatorName" value={this.state.buyCharge} placeholder="خرید شارژ" onChange={e => this.setState({ buyCharge: e.target.value })} />
+                <input className={`${sass.input} ${sass.ltr}`} type="text" id="operatorName" value={this.state.buyCharge} placeholder="creaخرید شارژ" onChange={e => this.setState({ buyCharge: e.target.value })} />
               </label>
               <label htmlFor="internetCharge">
                 <input className={`${sass.input} ${sass.ltr}`} type="text" id="internetCharge" value={this.state.internetCharge} placeholder="شارژ اینترنت" onChange={e => this.setState({ internetCharge: e.target.value })} />
