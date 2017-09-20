@@ -67,19 +67,24 @@ class SettingOperator extends React.Component {
           <div className={sass.form}>
             <form onSubmit={this.onSubmit}>
               <label htmlFor="servicTypeName">
-                <input className={sass.input} type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
+                نام اپراتور
+                <input className={sass.input} id="servicTypeName" type="text" value={this.state.name} placeholder="name" onChange={e => this.setState({ name: e.target.value })} />
               </label>
               <label htmlFor="buyCharge">
-                <input className={`${sass.input} ${sass.ltr}`} type="text" id="operatorName" value={this.state.buyCharge} placeholder="creaخرید شارژ" onChange={e => this.setState({ buyCharge: e.target.value })} />
+              خرید شارژ
+                <input className={`${sass.input} ${sass.ltr}`} id="buyCharge" type="text" value={this.state.buyCharge} placeholder="creaخرید شارژ" onChange={e => this.setState({ buyCharge: e.target.value })} />
               </label>
               <label htmlFor="internetCharge">
-                <input className={`${sass.input} ${sass.ltr}`} type="text" id="internetCharge" value={this.state.internetCharge} placeholder="شارژ اینترنت" onChange={e => this.setState({ internetCharge: e.target.value })} />
+              شارژ اینترنت
+                <input className={`${sass.input} ${sass.ltr}`} id="internetCharge" type="text" value={this.state.internetCharge} placeholder="شارژ اینترنت" onChange={e => this.setState({ internetCharge: e.target.value })} />
               </label>
               <label htmlFor="payBill">
-                <input className={`${sass.input} ${sass.ltr}`} type="text" id="payBill" value={this.state.payBill} placeholder="پرداخت قبض" onChange={e => this.setState({ payBill: e.target.value })} />
+              پرداخت قبض
+                <input className={`${sass.input} ${sass.ltr}`} id="payBill" type="text" value={this.state.payBill} placeholder="پرداخت قبض" onChange={e => this.setState({ payBill: e.target.value })} />
               </label>
               <label htmlFor="credit">
-                <input className={`${sass.input} ${sass.ltr}`} type="text" id="credit" value={this.state.credit} placeholder="اعلام موجودی" onChange={e => this.setState({ credit: e.target.value })} />
+              اعلام موجودی
+                <input className={`${sass.input} ${sass.ltr}`} id="credit" type="text" value={this.state.credit} placeholder="اعلام موجودی" onChange={e => this.setState({ credit: e.target.value })} />
               </label>
 
               <button className={sass.btn__plus} type="submit">ارسال</button>

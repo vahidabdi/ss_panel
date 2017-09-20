@@ -1,0 +1,11 @@
+query Reports($typeId: ID!) {
+  reports(typeId: $typeId) {
+    id
+    views
+    reportDate
+    type {
+      name
+      nameEng
+    }
+  }
+}
